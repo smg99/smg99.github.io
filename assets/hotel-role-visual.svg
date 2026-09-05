@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 850" role="img" aria-labelledby="t d">
+<title id="t">One simple hotel system for every role</title><desc id="d">A hand-drawn style explanation of how owners, hosts, housekeeping and guests use one hotel system, with plans for different property needs.</desc>
+<rect width="1400" height="850" rx="32" fill="#faf8f3"/>
+<g font-family="Comic Sans MS, Marker Felt, cursive" fill="#17203b">
+<text x="55" y="72" font-size="44" font-weight="700">One simple system</text>
+<text x="55" y="120" font-size="40" font-weight="700">everyone on your team can use.</text>
+<text x="58" y="160" font-size="19" fill="#526070">Less confusion. More visibility. Happier guests.</text>
+</g>
+<g stroke="#26364a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1040 55q45-30 92 2"/><path d="M1115 35l12 28 25-15"/>
+<path d="M650 250q-70-65-180-75"/><path d="M475 170l-20 8 13 17"/>
+<path d="M750 250q70-65 180-75"/><path d="M925 170l20 8-13 17"/>
+</g>
+<g stroke="#d8d4ca" stroke-width="2">
+<rect x="35" y="205" width="300" height="265" rx="24" fill="#eaf5e9"/>
+<rect x="355" y="205" width="300" height="265" rx="24" fill="#eaf1fb"/>
+<rect x="675" y="205" width="300" height="265" rx="24" fill="#fff0e7"/>
+<rect x="995" y="205" width="370" height="265" rx="24" fill="#eeeafd"/>
+</g>
+<g font-family="Comic Sans MS, Marker Felt, cursive" fill="#17203b">
+<text x="65" y="245" font-size="26" font-weight="700">Owner</text><text x="65" y="275" font-size="16" fill="#53606e">Big picture • full control</text>
+<text x="65" y="315" font-size="16">✓ Revenue &amp; occupancy</text><text x="65" y="345" font-size="16">✓ Multiple properties</text><text x="65" y="375" font-size="16">✓ Reports &amp; insights</text><text x="65" y="405" font-size="16">✓ Stay in control anywhere</text>
+<text x="385" y="245" font-size="26" font-weight="700">Host / Manager</text><text x="385" y="275" font-size="16" fill="#53606e">Run the day-to-day</text>
+<text x="385" y="315" font-size="16">✓ Bookings &amp; calendar</text><text x="385" y="345" font-size="16">✓ Guest enquiries</text><text x="385" y="375" font-size="16">✓ Rates &amp; availability</text><text x="385" y="405" font-size="16">✓ Coordinate the team</text>
+<text x="705" y="245" font-size="26" font-weight="700">Housekeeping</text><text x="705" y="275" font-size="16" fill="#53606e">Clear tasks • less chasing</text>
+<text x="705" y="315" font-size="16">✓ Today's cleaning list</text><text x="705" y="345" font-size="16">✓ Mark rooms ready</text><text x="705" y="375" font-size="16">✓ See new check-outs</text><text x="705" y="405" font-size="16">✓ Stay in sync</text>
+<text x="1025" y="245" font-size="26" font-weight="700">Guest</text><text x="1025" y="275" font-size="16" fill="#53606e">A smoother stay</text>
+<text x="1025" y="315" font-size="16">✓ Browse &amp; compare</text><text x="1025" y="345" font-size="16">✓ Check availability</text><text x="1025" y="375" font-size="16">✓ Enquire / book directly</text><text x="1025" y="405" font-size="16">✓ Get check-in information</text>
+</g>
+<rect x="260" y="505" width="880" height="210" rx="28" fill="#fff" stroke="#cfc9bd" stroke-width="3"/>
+<g font-family="Comic Sans MS, Marker Felt, cursive" fill="#17203b">
+<text x="305" y="548" font-size="24" font-weight="700">Your Property Dashboard</text>
+<text x="305" y="580" font-size="15" fill="#66717d">Bookings • availability • properties • guests • housekeeping • reports</text>
+</g>
+<g fill="#edf4fb" stroke="#c7d5e4" stroke-width="2">
+<rect x="305" y="605" width="140" height="72" rx="14"/><rect x="465" y="605" width="140" height="72" rx="14"/><rect x="625" y="605" width="140" height="72" rx="14"/><rect x="785" y="605" width="140" height="72" rx="14"/><rect x="945" y="605" width="140" height="72" rx="14"/>
+</g>
+<g font-family="Comic Sans MS, Marker Felt, cursive" fill="#17203b" font-size="15" text-anchor="middle">
+<text x="375" y="633">Bookings</text><text x="375" y="658">Today / upcoming</text>
+<text x="535" y="633">Calendar</text><text x="535" y="658">Availability</text>
+<text x="695" y="633">Guests</text><text x="695" y="658">Details &amp; notes</text>
+<text x="855" y="633">Housekeeping</text><text x="855" y="658">Tasks &amp; status</text>
+<text x="1015" y="633">Reports</text><text x="1015" y="658">Insights</text>
+</g>
+<g font-family="Comic Sans MS, Marker Felt, cursive" fill="#17203b">
+<text x="55" y="775" font-size="22" font-weight="700">Start simple. Grow when you need more.</text>
+<text x="55" y="805" font-size="15" fill="#5f6974">Essential website → Smart availability → Direct Booking Pro / custom workflows</text>
+</g>
+<path d="M1160 755q80-35 170 0" stroke="#6b9e68" stroke-width="4" fill="none" stroke-linecap="round"/>
+<text x="1180" y="800" font-family="Comic Sans MS, Marker Felt, cursive" font-size="18" fill="#477c52">built around your property</text>
+</svg>
