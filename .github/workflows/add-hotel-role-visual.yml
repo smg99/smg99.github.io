@@ -1,0 +1,46 @@
+name: Add hotel role visual
+
+on:
+  push:
+    paths:
+      - 'assets/hotel-role-visual.svg'
+      - '.github/workflows/add-hotel-role-visual.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  inject-visual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add visual section to hotels page
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('hotels.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<section id="plans" class="plans">'
+          if 'id="role-system"' in s:
+              print('Role visual already present; nothing to do.')
+              raise SystemExit(0)
+          section = '''<section id="role-system" class="reveal" style="padding:24px 0 70px"><div style="border:1px solid var(--l);border-radius:28px;overflow:hidden;background:rgba(255,255,255,.02);box-shadow:0 25px 80px rgba(0,0,0,.22)"><img src="/assets/hotel-role-visual.svg" alt="How owners, hosts, housekeeping and guests can use one simple hotel system" style="display:block;width:100%;height:auto" loading="lazy"></div><p class="fine" style="text-align:center;margin:14px auto 0;max-width:760px">One system, different roles. The exact tools can be kept simple for smaller properties and expanded as the hotel's needs grow.</p></section>'''
+          if marker not in s:
+              raise SystemExit('Could not find plans section marker in hotels.html')
+          s = s.replace(marker, section + marker, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit updated hotels page
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hotels.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Add hotel role and workflow visual"
+            git push
+          fi
