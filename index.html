@@ -38,8 +38,35 @@
   <style>
     :root{--bg:#09090b;--panel:#111114;--panel2:#15151a;--text:#f7f7f8;--muted:#a1a1aa;--line:#27272a;--accent:#a78bfa;--accent2:#22d3ee;--max:1120px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 70% 5%,rgba(167,139,250,.13),transparent 32rem),radial-gradient(circle at 10% 35%,rgba(34,211,238,.08),transparent 28rem),var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;transition:background-color .25s,color .25s}
-    a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);position:relative;z-index:3}.brand{font-family:'Space Grotesk';font-weight:700;letter-spacing:-.04em}.brand span{color:var(--accent)}.navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px;align-items:center}.navlinks a{position:relative;display:inline-flex;align-items:center;padding:4px 2px;transition:color .25s ease,transform .25s cubic-bezier(.2,.8,.2,1);outline:none}.navlinks a::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .25s cubic-bezier(.2,.8,.2,1);border-radius:999px}.navlinks a:hover{color:var(--text);transform:translateY(-1px)}.navlinks a:hover::after{transform:scaleX(1);transform-origin:left}.navlinks a:focus-visible{color:var(--text);outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
-    .nav-right{display:flex;align-items:center;gap:20px}
+    a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}.nav{height:78px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07);position:relative;z-index:3}.brand{font-family:'Space Grotesk';font-weight:700;letter-spacing:-.04em}.brand span{color:var(--accent)}
+    @keyframes navSlideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+    .navlinks{display:flex;gap:24px;color:var(--muted);font-size:14px;align-items:center;margin-left:auto;margin-right:20px;animation:navSlideDown .55s cubic-bezier(.16,1,.3,1) .08s both}
+    .navlinks a{position:relative;display:inline-flex;align-items:center;padding:4px 2px;transition:color .25s ease,transform .25s cubic-bezier(.2,.8,.2,1);outline:none}.navlinks a::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:1.5px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .25s cubic-bezier(.2,.8,.2,1);border-radius:999px}.navlinks a:hover{color:var(--text);transform:translateY(-1px)}.navlinks a:hover::after{transform:scaleX(1);transform-origin:left}.navlinks a:focus-visible{color:var(--text);outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+    .nav-right{display:flex;align-items:center;gap:12px;animation:navSlideDown .55s cubic-bezier(.16,1,.3,1) .22s both}
+    
+    /* Language Switcher */
+    .lang-wrap{position:relative;display:inline-block}
+    .lang-toggle{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:4px 11px 4px 9px;color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;outline:none;user-select:none;min-height:34px}
+    .lang-toggle:hover{background:rgba(255,255,255,.09);border-color:#52525b}
+    .lang-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    .lang-globe{color:var(--accent);flex-shrink:0}
+    .lang-label{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.02em}
+    .lang-chevron{transition:transform .2s ease;color:var(--muted);flex-shrink:0}
+    .lang-wrap.open .lang-chevron{transform:rotate(180deg)}
+    .lang-menu{position:absolute;top:calc(100% + 8px);right:0;background:#141417;border:1px solid var(--line);border-radius:14px;padding:6px;min-width:215px;box-shadow:0 18px 36px rgba(0,0,0,.55);display:none;flex-direction:column;gap:3px;z-index:100;backdrop-filter:blur(16px)}
+    .lang-wrap.open .lang-menu{display:flex;animation:navSlideDown .2s cubic-bezier(.16,1,.3,1) both}
+    .lang-option{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:9px;border:none;background:transparent;color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-align:left;width:100%;transition:background .15s,color .15s}
+    .lang-option:hover{background:rgba(255,255,255,.08)}
+    .lang-option:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+    .lang-option.active{background:rgba(167,139,250,.16);color:#ffffff;font-weight:600}
+    .lang-flag{font-size:15px;line-height:1}
+    .lang-meta{display:flex;flex-direction:column;line-height:1.2;flex:1}
+    .lang-name{font-size:13px;font-weight:600;color:inherit}
+    .lang-meta-sub{font-size:10.5px;color:var(--muted);font-weight:400}
+    .lang-option.active .lang-meta-sub{color:#c4b5fd}
+    .lang-check{color:var(--accent);margin-left:auto;display:none;flex-shrink:0}
+    .lang-option.active .lang-check{display:inline-block}
+
     .theme-toggle{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 6px;color:var(--text);font-family:'DM Sans',system-ui,sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;outline:none;user-select:none;min-height:34px}
     .theme-toggle:hover{background:rgba(255,255,255,.09);border-color:#52525b}
     .theme-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -47,6 +74,45 @@
     .theme-switch-thumb{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#f4f4f5;color:#18181b;display:flex;align-items:center;justify-content:center;transition:transform .2s cubic-bezier(.4,0,.2,1),background .2s;box-shadow:0 1px 2px rgba(0,0,0,.3)}
     .theme-switch-thumb .icon-light{display:none}
     .theme-switch-thumb .icon-dark{display:block}
+
+    /* Mobile Navigation Drawer & Hamburger Trigger */
+    .mobile-nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);cursor:pointer;transition:all .2s ease;outline:none;margin-left:auto;padding:0;-webkit-tap-highlight-color:transparent}
+    .mobile-nav-toggle:hover{background:rgba(255,255,255,.1);border-color:#52525b}
+    .mobile-nav-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    .mobile-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:9998;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1)}
+    .mobile-drawer-overlay.open{opacity:1;pointer-events:auto}
+    .mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--panel);border-left:1px solid var(--line);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.16,1,.3,1);box-shadow:-12px 0 38px rgba(0,0,0,.5);visibility:hidden;overflow:hidden}
+    .mobile-drawer.open{transform:translateX(0);visibility:visible}
+    body.drawer-open{overflow:hidden!important}
+    .drawer-header{height:78px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);flex-shrink:0}
+    .drawer-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.03em;color:var(--text)}
+    .drawer-brand span{color:var(--accent)}
+    .drawer-close-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .2s;outline:none}
+    .drawer-close-btn:hover{background:rgba(255,255,255,.09);color:var(--text);border-color:#52525b}
+    .drawer-close-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    .drawer-body{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:24px}
+    .drawer-section-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:10px}
+    .drawer-nav-list{display:flex;flex-direction:column;gap:7px}
+    .drawer-nav-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);color:var(--text);font-size:14.5px;font-weight:600;text-decoration:none;transition:all .2s;min-height:46px}
+    .drawer-nav-item:hover{background:rgba(255,255,255,.06);border-color:#52525b;transform:translateX(3px)}
+    .drawer-nav-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    .drawer-nav-item.highlight{background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3);color:#ddd6fe}
+    .drawer-nav-arrow{color:var(--muted);transition:transform .2s ease,color .2s ease;flex-shrink:0}
+    .drawer-nav-item:hover .drawer-nav-arrow{color:var(--accent);transform:translateX(2px)}
+    .drawer-external-links{display:flex;gap:10px;margin-top:4px}
+    .drawer-external-link{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--muted);text-decoration:none;transition:all .2s}
+    .drawer-external-link:hover{color:var(--text);background:rgba(255,255,255,.06);border-color:#52525b}
+    .drawer-control-card{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);gap:12px}
+    .drawer-control-info{display:flex;flex-direction:column;gap:2px}
+    .drawer-control-title{font-size:13.5px;font-weight:600;color:var(--text)}
+    .drawer-control-sub{font-size:11.5px;color:var(--muted)}
+    .drawer-lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .drawer-lang-chip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s ease;outline:none;min-height:46px}
+    .drawer-lang-chip .chip-flag{font-size:16px;line-height:1}
+    .drawer-lang-chip:hover{background:rgba(255,255,255,.08);border-color:#52525b}
+    .drawer-lang-chip.active{background:rgba(167,139,250,.16);border-color:var(--accent);color:#ffffff;font-weight:700}
+    .drawer-lang-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+    .drawer-footer-actions{margin-top:auto;padding-top:10px}
     .hero{min-height:calc(100vh - 79px);display:grid;align-items:center;position:relative;padding:90px 0 110px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:70px;align-items:center}.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:rgba(255,255,255,.025);padding:7px 11px;border-radius:999px;color:#d4d4d8;font-size:13px}.dot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 18px #34d399;animation:pulse 2s infinite}.hero h1{font-family:'Space Grotesk';font-size:clamp(48px,7vw,92px);line-height:.96;letter-spacing:-.065em;margin:25px 0 25px;max-width:900px}.gradient{background:linear-gradient(100deg,#fff 10%,#c4b5fd 48%,#67e8f9 85%);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:20px;color:var(--muted);max-width:680px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border-radius:12px;border:1px solid var(--line);font-weight:600;font-size:14px;transition:transform .25s,border-color .25s,background .25s}.btn:hover{transform:translateY(-3px);border-color:#52525b;background:#18181b}.btn.primary{background:#f4f4f5;color:#09090b;border-color:#f4f4f5}.btn.wa{border-color:#235c43}.orb{width:min(360px,70vw);aspect-ratio:1;border-radius:50%;position:relative;margin:auto;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.16),transparent 17%),radial-gradient(circle at center,rgba(167,139,250,.15),transparent 58%);border:1px solid rgba(255,255,255,.09);box-shadow:inset 0 0 80px rgba(167,139,250,.08),0 0 100px rgba(167,139,250,.08);animation:float 7s ease-in-out infinite}.orb:before,.orb:after{content:'';position:absolute;inset:12%;border:1px solid rgba(167,139,250,.24);border-radius:50%;animation:spin 14s linear infinite}.orb:after{inset:23%;border-color:rgba(34,211,238,.2);animation-duration:10s;animation-direction:reverse}.orbit{position:absolute;inset:0;animation:spin 9s linear infinite}.orbit i{position:absolute;width:9px;height:9px;border-radius:50%;background:#67e8f9;top:7%;left:48%;box-shadow:0 0 22px #67e8f9}.orb-core{position:absolute;inset:35%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ddd6fe,#8b5cf6 45%,#27204a 100%);box-shadow:0 0 70px rgba(139,92,246,.55);animation:breathe 4s ease-in-out infinite}
     section{padding:100px 0;border-top:1px solid rgba(255,255,255,.06)}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:38px}.kicker{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:var(--accent);font-weight:700}.section h2{font-family:'Space Grotesk';font-size:clamp(34px,5vw,56px);letter-spacing:-.055em;line-height:1.02;margin:8px 0}.section-head p{max-width:480px;color:var(--muted);margin:0}.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{position:relative;padding:28px;min-height:245px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border:1px solid var(--line);border-radius:22px;overflow:hidden;transition:transform .35s,border-color .35s,background .35s}.card:before{content:'';position:absolute;width:180px;height:180px;right:-80px;top:-80px;background:radial-gradient(circle,rgba(167,139,250,.18),transparent 70%);transition:transform .5s}.card:hover{transform:translateY(-7px);border-color:#3f3f46;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025))}.card:hover:before{transform:scale(1.5)}.card .num{color:#71717a;font-size:12px}.card h3{font-family:'Space Grotesk';font-size:27px;letter-spacing:-.04em;margin:22px 0 10px}.card p{color:var(--muted);margin:0 0 25px}.tag{display:inline-block;border:1px solid var(--line);padding:5px 9px;border-radius:999px;color:#d4d4d8;font-size:12px;margin:3px 3px 0 0}.wide{grid-column:1/-1}
     .client-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.client{padding:26px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));transition:.3s}.client:hover{transform:translateY(-5px);border-color:#52525b}.client .num{color:#71717a;font-size:12px}.client h3{font-family:'Space Grotesk';font-size:25px;letter-spacing:-.04em;margin:20px 0 8px}.client p{color:var(--muted);font-size:14px;margin:0 0 18px}.client .link{font-size:13px;font-weight:700;color:#ddd6fe}
@@ -55,7 +121,33 @@
     .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.faq-item{border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012));padding:24px 26px;transition:border-color .25s,transform .25s}.faq-item:hover{border-color:#3f3f46;transform:translateY(-2px)}.faq-item summary{font-family:'Space Grotesk';font-size:18px;font-weight:700;letter-spacing:-.03em;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--text);outline:none;user-select:none}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary:after{content:'+';color:var(--accent);font-size:22px;font-weight:400;margin-left:14px;transition:transform .25s}.faq-item[open] summary:after{content:'−';color:var(--accent2)}.faq-item p{color:var(--muted);margin:14px 0 0;font-size:14px;line-height:1.65}
     .scroll-progress-track{position:fixed;top:0;left:0;width:100%;height:3px;background:rgba(255,255,255,.03);z-index:9999;pointer-events:none}
     .scroll-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#c4b5fd,var(--accent2));box-shadow:0 0 8px rgba(167,139,250,.6);transition:width .05s ease-out}
-    .footer{padding:60px 0 80px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:14px}.footer strong{color:var(--text)}.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}.reveal.visible{opacity:1;transform:none}@keyframes pulse{50%{opacity:.35;transform:scale(.75)}}@keyframes float{50%{transform:translateY(-14px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes breathe{50%{transform:scale(1.08)}}
+    .hero-scroll-indicator{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted);text-decoration:none;z-index:4;cursor:pointer;outline:none;transition:opacity .25s ease,border-color .2s,color .2s,background .2s,transform .2s}
+    .hero-scroll-indicator:hover{color:var(--text);border-color:#52525b;background:rgba(255,255,255,.08);transform:translateX(-50%) translateY(2px)}
+    .hero-scroll-indicator:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    .hero-scroll-indicator svg{animation:heroBounce 2s cubic-bezier(.28,.84,.42,1) infinite;display:block}
+    @keyframes heroBounce{0%,20%,50%,80%,100%{transform:translateY(0)}40%{transform:translateY(5px)}60%{transform:translateY(2.5px)}}
+    
+    /* Copy Email feature */
+    .email-item{cursor:pointer;position:relative;user-select:none;text-decoration:none}
+    .email-details{display:flex;flex-direction:column;gap:3px;text-align:left}
+    .email-title{font-size:14px;font-weight:600;color:var(--text)}
+    .email-val{font-family:'Space Grotesk',sans-serif;font-size:13px;color:#c4b5fd;letter-spacing:-.01em}
+    .email-actions{display:flex;align-items:center;gap:8px}
+    .copy-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:12px;font-weight:600;color:#e4e4e7;transition:all .2s ease}
+    .email-item:hover .copy-badge,.copy-badge:hover{background:rgba(167,139,250,.15);border-color:var(--accent);color:#ffffff}
+    .copy-badge.copied{background:rgba(16,185,129,.16);border-color:#10b981;color:#34d399}
+    .mailto-link-fallback{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;border:1px solid var(--line);color:var(--muted);background:rgba(255,255,255,.02);transition:all .2s}
+    .mailto-link-fallback:hover{color:var(--text);border-color:#52525b;background:rgba(255,255,255,.08)}
+    .copy-email-btn{background:transparent;cursor:pointer;color:var(--text)}
+    .copy-email-btn.copied{border-color:#10b981;background:rgba(16,185,129,.15);color:#34d399}
+    .copy-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(40px);background:#18181b;color:#f4f4f5;border:1px solid #3f3f46;padding:11px 20px;border-radius:999px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;box-shadow:0 12px 32px rgba(0,0,0,.5);opacity:0;pointer-events:none;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .25s ease;z-index:10000}
+    .copy-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+    .copy-toast svg{flex-shrink:0}
+    
+    .footer{padding:60px 0 80px;display:flex;justify-content:space-between;gap:20px;color:var(--muted);font-size:14px}.footer strong{color:var(--text)}.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}.reveal.visible{opacity:1;transform:none}
+    .card.reveal:not(.visible):nth-child(odd),.client.reveal:not(.visible):nth-child(odd){transform:translate(-24px,20px)}
+    .card.reveal:not(.visible):nth-child(even),.client.reveal:not(.visible):nth-child(even){transform:translate(24px,20px)}
+    @keyframes pulse{50%{opacity:.35;transform:scale(.75)}}@keyframes float{50%{transform:translateY(-14px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes breathe{50%{transform:scale(1.08)}}
     
     /* High-contrast Light Mode */
     [data-theme="light"]{
@@ -102,26 +194,228 @@
     [data-theme="light"] .faq-item:hover{border-color:#94a3b8}
     [data-theme="light"] .scroll-progress-track{background:rgba(0,0,0,.06)}
     [data-theme="light"] .scroll-progress-bar{background:linear-gradient(90deg,#6d28d9,#8b5cf6,#0e7490);box-shadow:0 0 8px rgba(109,40,217,.35)}
+    [data-theme="light"] .lang-toggle{background:#ffffff;border-color:#cbd5e1;color:#0f172a;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    [data-theme="light"] .lang-toggle:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .lang-globe{color:#6d28d9}
+    [data-theme="light"] .lang-menu{background:#ffffff;border-color:#cbd5e1;box-shadow:0 14px 32px rgba(0,0,0,.12)}
+    [data-theme="light"] .lang-option{color:#1e293b}
+    [data-theme="light"] .lang-option:hover{background:#f1f5f9}
+    [data-theme="light"] .lang-option.active{background:#ede9fe;color:#5b21b6}
+    [data-theme="light"] .lang-option.active .lang-meta-sub{color:#6d28d9}
+    [data-theme="light"] .lang-check{color:#6d28d9}
     [data-theme="light"] .theme-toggle{background:#ffffff;border-color:#cbd5e1;color:#0f172a;box-shadow:0 1px 2px rgba(0,0,0,.04)}
     [data-theme="light"] .theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8}
     [data-theme="light"] .theme-switch-track{background:#6d28d9}
     [data-theme="light"] .theme-switch-thumb{transform:translateX(14px);background:#ffffff;color:#b45309}
     [data-theme="light"] .theme-switch-thumb .icon-dark{display:none}
     [data-theme="light"] .theme-switch-thumb .icon-light{display:block}
+    [data-theme="light"] .hero-scroll-indicator{background:#ffffff;border-color:#cbd5e1;color:#64748b;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    [data-theme="light"] .hero-scroll-indicator:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+    [data-theme="light"] .email-val{color:#6d28d9}
+    [data-theme="light"] .copy-badge{background:#f1f5f9;border-color:#cbd5e1;color:#334155}
+    [data-theme="light"] .email-item:hover .copy-badge,[data-theme="light"] .copy-badge:hover{background:#ede9fe;border-color:#a78bfa;color:#5b21b6}
+    [data-theme="light"] .copy-badge.copied{background:#ecfdf5;border-color:#6ee7b7;color:#047857}
+    [data-theme="light"] .mailto-link-fallback{background:#ffffff;border-color:#e2e8f0;color:#64748b}
+    [data-theme="light"] .mailto-link-fallback:hover{background:#f8fafc;border-color:#94a3b8;color:#0f172a}
+    [data-theme="light"] .copy-email-btn.copied{background:#ecfdf5;border-color:#6ee7b7;color:#047857}
+    [data-theme="light"] .copy-toast{background:#0f172a;color:#f8fafc;border-color:#334155;box-shadow:0 12px 28px rgba(0,0,0,.15)}
 
-    @media(max-width:800px){.navlinks{display:flex;gap:12px;font-size:12px}.nav-right{gap:10px}.theme-toggle-label{display:none}.hero{padding:65px 0 80px}.hero-grid,.manifesto,.contact,.faq-grid{grid-template-columns:1fr;gap:50px}.hero h1{font-size:clamp(46px,14vw,76px)}.hero p{font-size:18px}.orb{width:260px}.projects,.client-grid{grid-template-columns:1fr}.wide{grid-column:auto}.section-head{display:block}.section-head p{margin-top:16px}.footer{display:block}.footer div+div{margin-top:12px}.faq-grid{gap:14px}} 
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orb,.orbit,.orb-core,.dot{animation:none}.reveal{opacity:1;transform:none;transition:none}.btn,.card,.client{transition:none}.scroll-progress-bar{transition:none}.theme-switch-thumb{transition:none}.navlinks a,.navlinks a::after{transition:none;transform:none}}
+    [data-theme="light"] .mobile-nav-toggle{background:#ffffff;border-color:#cbd5e1;color:#0f172a;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    [data-theme="light"] .mobile-nav-toggle:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .mobile-drawer{background:#ffffff;border-left-color:#cbd5e1;box-shadow:-12px 0 38px rgba(0,0,0,.15)}
+    [data-theme="light"] .drawer-header{border-bottom-color:#e2e8f0}
+    [data-theme="light"] .drawer-close-btn{background:#f8fafc;border-color:#cbd5e1;color:#475569}
+    [data-theme="light"] .drawer-close-btn:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+    [data-theme="light"] .drawer-nav-item{background:#f8fafc;border-color:#e2e8f0;color:#0f172a}
+    [data-theme="light"] .drawer-nav-item:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .drawer-nav-item.highlight{background:rgba(109,40,217,.08);border-color:rgba(109,40,217,.25);color:#6d28d9}
+    [data-theme="light"] .drawer-external-link{background:#f8fafc;border-color:#e2e8f0;color:#475569}
+    [data-theme="light"] .drawer-external-link:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+    [data-theme="light"] .drawer-control-card{background:#f8fafc;border-color:#e2e8f0}
+    [data-theme="light"] .drawer-lang-chip{background:#f8fafc;border-color:#cbd5e1;color:#334155}
+    [data-theme="light"] .drawer-lang-chip:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .drawer-lang-chip.active{background:#ede9fe;border-color:#6d28d9;color:#5b21b6}
+
+    @media(max-width:800px){.navlinks,.nav-right{display:none!important}.mobile-nav-toggle{display:inline-flex}.hero{padding:65px 0 80px}.hero-grid,.manifesto,.contact,.faq-grid{grid-template-columns:1fr;gap:50px}.hero h1{font-size:clamp(46px,14vw,76px)}.hero p{font-size:18px}.orb{width:260px}.projects,.client-grid{grid-template-columns:1fr}.wide{grid-column:auto}.section-head{display:block}.section-head p{margin-top:16px}.footer{display:block}.footer div+div{margin-top:12px}.faq-grid{gap:14px}} 
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.orb,.orbit,.orb-core,.dot{animation:none}.reveal{opacity:1;transform:none;transition:none}.card.reveal,.client.reveal{transform:none!important}.btn,.card,.client{transition:none}.scroll-progress-bar{transition:none}.theme-switch-thumb{transition:none}.navlinks,.nav-right{animation:none!important;opacity:1!important;transform:none!important}.navlinks a,.navlinks a::after{transition:none;transform:none}.hero-scroll-indicator svg{animation:none!important}.copy-toast{transition:none!important}}
   </style>
 </head>
 <body>
   <div class="scroll-progress-track" aria-hidden="true">
     <div class="scroll-progress-bar" id="scrollProgress"></div>
   </div>
+
+  <!-- Mobile Navigation Drawer Overlay & Container -->
+  <div id="mobileDrawerOverlay" class="mobile-drawer-overlay" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-brand">SMG<span>.</span> / The Calm Engineer</div>
+      <button id="mobileDrawerClose" class="drawer-close-btn" type="button" aria-label="Close navigation menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Nav Links -->
+      <div class="drawer-section">
+        <span class="drawer-section-label" data-i18n="drawer_nav_label">Navigation</span>
+        <nav class="drawer-nav-list" aria-label="Mobile navigation links">
+          <a href="#work" class="drawer-nav-item">
+            <span data-i18n="nav_work">Work</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#websites" class="drawer-nav-item">
+            <span data-i18n="nav_websites">Websites</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#philosophy" class="drawer-nav-item">
+            <span data-i18n="nav_philosophy">Philosophy</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#faq" class="drawer-nav-item">
+            <span data-i18n="nav_faq">FAQ</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="/hotels.html" class="drawer-nav-item highlight">
+            <span data-i18n="drawer_hotels_link">Hotel Solutions & Direct Booking ↗</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </nav>
+        <div class="drawer-external-links">
+          <a class="drawer-external-link" href="https://github.com/smg99" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="drawer-external-link" href="https://x.com/thecalmengineer" target="_blank" rel="noopener noreferrer">X / Twitter ↗</a>
+        </div>
+      </div>
+
+      <!-- Controls & Preferences (Theme & Language) -->
+      <div class="drawer-section">
+        <span class="drawer-section-label" data-i18n="drawer_preferences_label">Preferences & Controls</span>
+
+        <!-- Theme Switcher -->
+        <div class="drawer-control-card">
+          <div class="drawer-control-info">
+            <div class="drawer-control-title" data-i18n="drawer_theme_title">Appearance</div>
+            <div class="drawer-control-sub" id="drawerThemeSub">Dark Mode</div>
+          </div>
+          <button id="drawerThemeToggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle theme">
+            <span class="theme-switch-track" aria-hidden="true">
+              <span class="theme-switch-thumb">
+                <svg class="icon-dark" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg class="icon-light" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              </span>
+            </span>
+            <span class="theme-toggle-label" id="drawerThemeText">Dark</span>
+          </button>
+        </div>
+
+        <!-- Language Switcher -->
+        <div style="margin-top: 14px;">
+          <div class="drawer-control-title" style="font-size:12.5px;font-weight:600;margin-bottom:8px;" data-i18n="drawer_lang_title">Language</div>
+          <div class="drawer-lang-grid" role="group" aria-label="Select language">
+            <button type="button" class="drawer-lang-chip active" data-lang="en">
+              <span class="chip-flag" aria-hidden="true">🇺🇸</span>
+              <span>EN</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="de">
+              <span class="chip-flag" aria-hidden="true">🇩🇪</span>
+              <span>DE</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="ja">
+              <span class="chip-flag" aria-hidden="true">🇯🇵</span>
+              <span>JA</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="fr">
+              <span class="chip-flag" aria-hidden="true">🇫🇷</span>
+              <span>FR</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="es">
+              <span class="chip-flag" aria-hidden="true">🇪🇸</span>
+              <span>ES</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action CTA -->
+      <div class="drawer-footer-actions">
+        <a class="btn primary" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20found%20your%20work%20online%20and%20would%20like%20to%20discuss%20a%20website%20or%20digital%20project." target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;font-size:13px;padding:12px 18px;" data-i18n="drawer_cta_wa">Chat on WhatsApp ↗</a>
+      </div>
+    </div>
+  </aside>
+
   <div class="wrap">
     <nav class="nav">
       <a class="brand" href="/">SMG<span>.</span></a>
+      <div class="navlinks">
+        <a href="#work" data-i18n="nav_work">Work</a>
+        <a href="#websites" data-i18n="nav_websites">Websites</a>
+        <a href="#philosophy" data-i18n="nav_philosophy">Philosophy</a>
+        <a href="#faq" data-i18n="nav_faq">FAQ</a>
+        <a href="https://github.com/smg99">GitHub</a>
+        <a href="https://x.com/thecalmengineer">X</a>
+      </div>
       <div class="nav-right">
-        <div class="navlinks"><a href="#work">Work</a><a href="#websites">Websites</a><a href="#philosophy">Philosophy</a><a href="#faq">FAQ</a><a href="https://github.com/smg99">GitHub</a><a href="https://x.com/thecalmengineer">X</a></div>
+        <!-- Language Switcher -->
+        <div class="lang-wrap" id="langWrap">
+          <button id="langToggleBtn" class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language (current: English)" title="Select language">
+            <svg class="lang-globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span class="lang-label" id="currentLangLabel">EN</span>
+            <svg class="lang-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="lang-menu" id="langMenu" role="menu" aria-label="Select language">
+            <button type="button" class="lang-option active" role="menuitem" data-lang="en">
+              <span class="lang-flag" aria-hidden="true">🇺🇸</span>
+              <div class="lang-meta">
+                <span class="lang-name">English</span>
+                <span class="lang-meta-sub">Global / US / UK</span>
+              </div>
+              <svg class="lang-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button type="button" class="lang-option" role="menuitem" data-lang="de">
+              <span class="lang-flag" aria-hidden="true">🇩🇪</span>
+              <div class="lang-meta">
+                <span class="lang-name">Deutsch</span>
+                <span class="lang-meta-sub">Germany / DACH</span>
+              </div>
+              <svg class="lang-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button type="button" class="lang-option" role="menuitem" data-lang="ja">
+              <span class="lang-flag" aria-hidden="true">🇯🇵</span>
+              <div class="lang-meta">
+                <span class="lang-name">日本語</span>
+                <span class="lang-meta-sub">Japan / AI Tech</span>
+              </div>
+              <svg class="lang-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button type="button" class="lang-option" role="menuitem" data-lang="fr">
+              <span class="lang-flag" aria-hidden="true">🇫🇷</span>
+              <div class="lang-meta">
+                <span class="lang-name">Français</span>
+                <span class="lang-meta-sub">France / Europe</span>
+              </div>
+              <svg class="lang-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button type="button" class="lang-option" role="menuitem" data-lang="es">
+              <span class="lang-flag" aria-hidden="true">🇪🇸</span>
+              <div class="lang-meta">
+                <span class="lang-name">Español</span>
+                <span class="lang-meta-sub">Spain / Americas</span>
+              </div>
+              <svg class="lang-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Theme Toggle -->
         <button id="themeToggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to high-contrast light theme" title="Toggle high-contrast light theme">
           <span class="theme-switch-track" aria-hidden="true">
             <span class="theme-switch-thumb">
@@ -132,46 +426,58 @@
           <span class="theme-toggle-label" id="themeToggleText">Dark</span>
         </button>
       </div>
+
+      <!-- Mobile Navigation Hamburger Button (triggers below 800px) -->
+      <button id="mobileNavToggle" class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="18" x2="20" y2="18"></line>
+        </svg>
+      </button>
     </nav>
     <main>
       <section class="hero" style="border-top:0">
         <div class="hero-grid">
           <div class="reveal">
-            <div class="eyebrow"><i class="dot"></i> Building in public · India</div>
-            <h1>The Calm Engineer.<br><span class="gradient">Shipping useful things.</span></h1>
-            <p>Software architect and AI product builder — and the person behind a growing collection of real-world websites, AI-native products and digital experiences.</p>
-            <div class="actions"><a class="btn primary" href="#work">Explore the work →</a><a class="btn" href="#websites">Websites ↗</a><a class="btn wa" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20found%20your%20work%20online%20and%20would%20like%20to%20discuss%20a%20website%20or%20digital%20project." target="_blank" rel="noopener noreferrer">Talk on WhatsApp ↗</a></div>
+            <div class="eyebrow" data-i18n-html="hero_eyebrow"><i class="dot"></i> Building in public · India</div>
+            <h1 data-i18n-html="hero_h1">The Calm Engineer.<br><span class="gradient">Shipping useful things.</span></h1>
+            <p data-i18n="hero_desc">Software architect and AI product builder — and the person behind a growing collection of real-world websites, AI-native products and digital experiences.</p>
+            <div class="actions"><a class="btn primary" href="#work" data-i18n="hero_btn_work">Explore the work →</a><a class="btn" href="#websites" data-i18n="hero_btn_websites">Websites ↗</a><a class="btn wa" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20found%20your%20work%20online%20and%20would%20like%20to%20discuss%20a%20website%20or%20digital%20project." target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_wa">Talk on WhatsApp ↗</a></div>
           </div>
           <div class="reveal" style="transition-delay:.15s"><div class="orb" aria-hidden="true"><div class="orbit"><i></i></div><div class="orb-core"></div></div></div>
         </div>
+        <a href="#work" class="hero-scroll-indicator" id="heroScrollIndicator" aria-label="Explore work section" title="Scroll to explore work">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </a>
       </section>
 
       <section id="work" class="section">
-        <div class="section-head reveal"><div><div class="kicker">Selected work</div><h2>Small experiments.<br>Big systems thinking.</h2></div><p>I like ideas that can be built quickly, put in someone's hands, and improved from reality rather than theory.</p></div>
+        <div class="section-head reveal"><div><div class="kicker" data-i18n="work_kicker">Selected work</div><h2 data-i18n-html="work_h2">Small experiments.<br>Big systems thinking.</h2></div><p data-i18n="work_desc">I like ideas that can be built quickly, put in someone's hands, and improved from reality rather than theory.</p></div>
         <div class="projects">
-          <a class="card reveal" href="https://github.com/smg99/factoryos"><span class="num">01 · SYSTEMS</span><h3>FactoryOS</h3><p>An autonomous software-factory direction: workers, orchestration, memory, execution and the infrastructure around AI-native work.</p><span class="tag">AI agents</span><span class="tag">Orchestration</span><span class="tag">Automation</span></a>
-          <a class="card reveal" href="https://github.com/smg99/frontend-performance-lab"><span class="num">02 · DEVELOPER TOOLS</span><h3>Frontend Performance Lab</h3><p>AI-powered frontend performance analysis with MCP, CLI and browser-performance tooling.</p><span class="tag">MCP</span><span class="tag">Performance</span><span class="tag">DX</span></a>
-          <a class="card reveal" href="https://github.com/smg99/fde-lab"><span class="num">03 · AI WORKERS</span><h3>FDE Lab</h3><p>Experiments in forward-deployed engineering workers exposed as deterministic tools.</p><span class="tag">Workers</span><span class="tag">AI-native</span></a>
-          <a class="card reveal" href="https://github.com/smg99/ticket-flow"><span class="num">04 · WORKFLOW</span><h3>Ticket Flow</h3><p>Turning engineering tickets into structured execution workflows so intent can move cleanly into action.</p><span class="tag">Engineering</span><span class="tag">Automation</span></a>
+          <a class="card reveal" href="https://github.com/smg99/factoryos"><span class="num">01 · SYSTEMS</span><h3>FactoryOS</h3><p data-i18n="card1_desc">An autonomous software-factory direction: workers, orchestration, memory, execution and the infrastructure around AI-native work.</p><span class="tag">AI agents</span><span class="tag">Orchestration</span><span class="tag">Automation</span></a>
+          <a class="card reveal" href="https://github.com/smg99/frontend-performance-lab"><span class="num">02 · DEVELOPER TOOLS</span><h3>Frontend Performance Lab</h3><p data-i18n="card2_desc">AI-powered frontend performance analysis with MCP, CLI and browser-performance tooling.</p><span class="tag">MCP</span><span class="tag">Performance</span><span class="tag">DX</span></a>
+          <a class="card reveal" href="https://github.com/smg99/fde-lab"><span class="num">03 · AI WORKERS</span><h3>FDE Lab</h3><p data-i18n="card3_desc">Experiments in forward-deployed engineering workers exposed as deterministic tools.</p><span class="tag">Workers</span><span class="tag">AI-native</span></a>
+          <a class="card reveal" href="https://github.com/smg99/ticket-flow"><span class="num">04 · WORKFLOW</span><h3>Ticket Flow</h3><p data-i18n="card4_desc">Turning engineering tickets into structured execution workflows so intent can move cleanly into action.</p><span class="tag">Engineering</span><span class="tag">Automation</span></a>
         </div>
       </section>
 
       <section id="websites" class="section">
-        <div class="section-head reveal"><div><div class="kicker">Client websites</div><h2>Real websites.<br>Built for real businesses.</h2></div><p>Not mockups. Not template screenshots. These are live hospitality and brand experiences designed to turn attention into enquiries, bookings and trust.</p></div>
+        <div class="section-head reveal"><div><div class="kicker" data-i18n="websites_kicker">Client websites</div><h2 data-i18n-html="websites_h2">Real websites.<br>Built for real businesses.</h2></div><p data-i18n="websites_desc">Not mockups. Not template screenshots. These are live hospitality and brand experiences designed to turn attention into enquiries, bookings and trust.</p></div>
         <div class="client-grid">
-          <a class="client reveal" href="/hotels.html"><span class="num">01 · HOSPITALITY</span><h3>Luxury Hotel Websites</h3><p>A growing collection of hotel and villa websites across Goa, Santorini, Portugal and California — focused on brand, mobile UX, SEO and direct enquiry journeys.</p><span class="link">Explore the hotel work →</span></a>
-          <a class="client reveal" href="https://qa.jenvin.co.in/"><span class="num">02 · HOSPITALITY</span><h3>Jenvin Luxury Homes Goa</h3><p>A hospitality experience combining property presentation, availability, reservations and owner-facing workflows.</p><span class="link">View the project →</span></a>
+          <a class="client reveal" href="/hotels.html"><span class="num">01 · HOSPITALITY</span><h3 data-i18n="client1_title">Luxury Hotel Websites</h3><p data-i18n="client1_desc">A growing collection of hotel and villa websites across Goa, Santorini, Portugal and California — focused on brand, mobile UX, SEO and direct enquiry journeys.</p><span class="link" data-i18n="client1_link">Explore the hotel work →</span></a>
+          <a class="client reveal" href="https://qa.jenvin.co.in/"><span class="num">02 · HOSPITALITY</span><h3 data-i18n="client2_title">Jenvin Luxury Homes Goa</h3><p data-i18n="client2_desc">A hospitality experience combining property presentation, availability, reservations and owner-facing workflows.</p><span class="link" data-i18n="client2_link">View the project →</span></a>
         </div>
       </section>
 
       <section id="philosophy" class="section">
         <div class="manifesto">
-          <div class="quote reveal">“Build the smallest thing that can <em>prove the idea.</em>”</div>
+          <div class="quote reveal" data-i18n-html="philo_quote">“Build the smallest thing that can <em>prove the idea.</em>”</div>
           <div class="principles reveal" style="transition-delay:.12s">
-            <div class="principle"><b>01</b><span><strong>Ship early.</strong><br>Reality is a better specification than a perfect plan.</span></div>
-            <div class="principle"><b>02</b><span><strong>Make it delightful.</strong><br>Good UX is not decoration. It is how software earns trust.</span></div>
-            <div class="principle"><b>03</b><span><strong>Let systems compound.</strong><br>Reusable workers, tools and infrastructure should make the next experiment cheaper.</span></div>
-            <div class="principle"><b>04</b><span><strong>Stay calm.</strong><br>Less noise. Better decisions. Keep shipping.</span></div>
+            <div class="principle"><b>01</b><span data-i18n-html="philo_p1"><strong>Ship early.</strong><br>Reality is a better specification than a perfect plan.</span></div>
+            <div class="principle"><b>02</b><span data-i18n-html="philo_p2"><strong>Make it delightful.</strong><br>Good UX is not decoration. It is how software earns trust.</span></div>
+            <div class="principle"><b>03</b><span data-i18n-html="philo_p3"><strong>Let systems compound.</strong><br>Reusable workers, tools and infrastructure should make the next experiment cheaper.</span></div>
+            <div class="principle"><b>04</b><span data-i18n-html="philo_p4"><strong>Stay calm.</strong><br>Less noise. Better decisions. Keep shipping.</span></div>
           </div>
         </div>
       </section>
@@ -179,77 +485,94 @@
       <section id="faq" class="section">
         <div class="section-head reveal">
           <div>
-            <div class="kicker">Common questions</div>
-            <h2>Clear answers.<br>Before we build.</h2>
+            <div class="kicker" data-i18n="faq_kicker">Common questions</div>
+            <h2 data-i18n-html="faq_h2">Clear answers.<br>Before we build.</h2>
           </div>
-          <p>Practical answers to typical questions from hotel & villa operators, startup founders, and engineering teams.</p>
+          <p data-i18n="faq_desc">Practical answers to typical questions from hotel & villa operators, startup founders, and engineering teams.</p>
         </div>
         <div class="faq-grid">
           <details class="faq-item reveal" open>
-            <summary>How does the hotel direct booking & WhatsApp flow work?</summary>
-            <p>We build mobile-first hospitality websites with live room showcase, seasonal availability calendars, and direct WhatsApp reservation journeys. Guests select suites, confirm travel dates, and enquiry details route directly to your host's WhatsApp. You capture direct guest relationships, collect deposits upfront, and avoid 15%–25% OTA commissions without paying costly PMS monthly fees.</p>
+            <summary data-i18n="faq1_q">How does the hotel direct booking & WhatsApp flow work?</summary>
+            <p data-i18n="faq1_a">We build mobile-first hospitality websites with live room showcase, seasonal availability calendars, and direct WhatsApp reservation journeys. Guests select suites, confirm travel dates, and enquiry details route directly to your host's WhatsApp. You capture direct guest relationships, collect deposits upfront, and avoid 15%–25% OTA commissions without paying costly PMS monthly fees.</p>
           </details>
           <details class="faq-item reveal" open>
-            <summary>What types of AI products and custom software do you build?</summary>
-            <p>Full-stack web applications, autonomous digital workers, Model Context Protocol (MCP) integrations, and LLM-powered interfaces. Everything is engineered with deterministic fallbacks, clean API boundaries, and responsive interfaces designed to compound in utility over time.</p>
+            <summary data-i18n="faq2_q">What types of AI products and custom software do you build?</summary>
+            <p data-i18n="faq2_a">Full-stack web applications, autonomous digital workers, Model Context Protocol (MCP) integrations, and LLM-powered interfaces. Everything is engineered with deterministic fallbacks, clean API boundaries, and responsive interfaces designed to compound in utility over time.</p>
           </details>
           <details class="faq-item reveal">
-            <summary>Can you migrate an existing hotel or business website?</summary>
-            <p>Yes. We regularly modernize slow or outdated WordPress, Wix, Squarespace, and custom websites. We preserve your existing domain authority, upgrade page load speed to sub-second benchmarks, optimize local SEO, and configure custom domains and hosting cleanly.</p>
+            <summary data-i18n="faq3_q">Can you migrate an existing hotel or business website?</summary>
+            <p data-i18n="faq3_a">Yes. We regularly modernize slow or outdated WordPress, Wix, Squarespace, and custom websites. We preserve your existing domain authority, upgrade page load speed to sub-second benchmarks, optimize local SEO, and configure custom domains and hosting cleanly.</p>
           </details>
           <details class="faq-item reveal">
-            <summary>What are typical turnaround times and project milestones?</summary>
-            <p>We adhere strictly to our "ship early" ethos. Most hospitality websites and focused product MVPs launch within 1 to 3 weeks. You get hands-on staging reviews early in the process so reality shapes the build rather than lengthy theoretical planning.</p>
+            <summary data-i18n="faq4_q">What are typical turnaround times and project milestones?</summary>
+            <p data-i18n="faq4_a">We adhere strictly to our "ship early" ethos. Most hospitality websites and focused product MVPs launch within 1 to 3 weeks. You get hands-on staging reviews early in the process so reality shapes the build rather than lengthy theoretical planning.</p>
           </details>
           <details class="faq-item reveal">
-            <summary>Are there recurring platform fees or code lock-in?</summary>
-            <p>No. You own 100% of your codebase, digital assets, and custom domain setup. For hotel builds, we prioritize lightweight architectures that run at near-zero maintenance overhead rather than locking you into expensive monthly SaaS subscriptions.</p>
+            <summary data-i18n="faq5_q">Are there recurring platform fees or code lock-in?</summary>
+            <p data-i18n="faq5_a">No. You own 100% of your codebase, digital assets, and custom domain setup. For hotel builds, we prioritize lightweight architectures that run at near-zero maintenance overhead rather than locking you into expensive monthly SaaS subscriptions.</p>
           </details>
           <details class="faq-item reveal">
-            <summary>How do we start a discussion about our project?</summary>
-            <p>Drop a quick message on WhatsApp or email with your current website link, property details, or product concept. We'll review your scope, propose a sensible implementation plan, and answer any technical questions upfront.</p>
+            <summary data-i18n="faq6_q">How do we start a discussion about our project?</summary>
+            <p data-i18n="faq6_a">Drop a quick message on WhatsApp or email with your current website link, property details, or product concept. We'll review your scope, propose a sensible implementation plan, and answer any technical questions upfront.</p>
           </details>
         </div>
       </section>
 
       <section class="section">
-        <div class="section-head reveal"><div><div class="kicker">Now</div><h2>AI-native software.<br>Automation. UX.</h2></div><p>Currently exploring the intersection of AI agents, MCP, developer experience, autonomous digital workers and motion-rich interfaces.</p></div>
-        <div class="actions reveal"><a class="btn primary" href="https://github.com/smg99">See everything on GitHub →</a><a class="btn" href="/hotels.html">Explore hotel work →</a></div>
+        <div class="section-head reveal"><div><div class="kicker" data-i18n="now_kicker">Now</div><h2 data-i18n-html="now_h2">AI-native software.<br>Automation. UX.</h2></div><p data-i18n="now_desc">Currently exploring the intersection of AI agents, MCP, developer experience, autonomous digital workers and motion-rich interfaces.</p></div>
+        <div class="actions reveal"><a class="btn primary" href="https://github.com/smg99" data-i18n="now_btn_github">See everything on GitHub →</a><a class="btn" href="/hotels.html" data-i18n="now_btn_hotels">Explore hotel work →</a></div>
       </section>
 
       <section id="contact" class="section">
         <div class="contact">
-          <div class="contact-card reveal"><div class="kicker">Have a project?</div><h3>Let's build something useful.</h3><p>If you need a hotel website, business website, AI product, automation or a digital experience that needs to feel considered rather than generic, start with a conversation.</p><div class="actions"><a class="btn primary" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener noreferrer">Start on WhatsApp →</a><a class="btn" href="https://github.com/smg99">See GitHub →</a></div></div>
-          <div class="contact-card reveal" style="transition-delay:.12s"><div class="kicker">Elsewhere</div><div class="contact-list"><a class="contact-link" href="https://github.com/smg99" target="_blank" rel="noopener noreferrer">GitHub <span>Projects & code ↗</span></a><a class="contact-link" href="https://x.com/thecalmengineer" target="_blank" rel="noopener noreferrer">X <span>Building in public ↗</span></a><a class="contact-link" href="https://smg99.github.io/hotels.html">Hotel work <span>Hospitality portfolio ↗</span></a></div></div>
+          <div class="contact-card reveal"><div class="kicker" data-i18n="contact_kicker">Have a project?</div><h3 data-i18n="contact_h3">Let's build something useful.</h3><p data-i18n="contact_p">If you need a hotel website, business website, AI product, automation or a digital experience that needs to feel considered rather than generic, start with a conversation.</p><div class="actions"><a class="btn primary" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20you." target="_blank" rel="noopener noreferrer" data-i18n="contact_btn_wa">Start on WhatsApp →</a><button type="button" class="btn copy-email-btn" id="copyEmailBtnAction" aria-label="Copy email sumitg3767@gmail.com to clipboard" title="Copy email address to clipboard"><svg class="icon-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="btn-copy-label" data-i18n="contact_btn_copy">Copy email</span></button><a class="btn" href="https://github.com/smg99" data-i18n="contact_btn_github">See GitHub →</a></div></div>
+          <div class="contact-card reveal" style="transition-delay:.12s"><div class="kicker" data-i18n="contact_kicker_elsewhere">Direct & Elsewhere</div><div class="contact-list"><div class="contact-link email-item" id="copyEmailRow" role="button" tabindex="0" aria-label="Copy email sumitg3767@gmail.com to clipboard" title="Click to copy sumitg3767@gmail.com"><div class="email-details"><span class="email-title" data-i18n="contact_email_title">Email</span><span class="email-val">sumitg3767@gmail.com</span></div><div class="email-actions"><span class="copy-badge" id="copyBadge"><svg class="icon-copy" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><svg class="icon-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="badge-text" id="copyBadgeText" data-i18n="contact_btn_copy">Copy email</span></span><a href="mailto:sumitg3767@gmail.com" class="mailto-link-fallback" title="Open in default mail client" aria-label="Open in email client" onclick="event.stopPropagation()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg></a></div></div><a class="contact-link" href="https://github.com/smg99" target="_blank" rel="noopener noreferrer">GitHub <span>Projects & code ↗</span></a><a class="contact-link" href="https://x.com/thecalmengineer" target="_blank" rel="noopener noreferrer">X <span>Building in public ↗</span></a><a class="contact-link" href="https://smg99.github.io/hotels.html"><span data-i18n="contact_link_hotels">Hotel work</span> <span data-i18n="contact_sub_hotels">Hospitality portfolio ↗</span></a></div></div>
         </div>
       </section>
     </main>
-    <footer class="footer"><div>© 2026 <strong>Sumit Gajjar</strong></div><div>The Calm Engineer · Build. Learn. Ship again.</div></footer>
-  </div>
+    <div id="copyToast" class="copy-toast" role="status" aria-live="polite">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span>Email copied: <strong>sumitg3767@gmail.com</strong></span>
+    </div>
+    <div id="langToast" class="copy-toast" role="status" aria-live="polite">
+      <span id="langToastFlag" style="font-size:16px;line-height:1" aria-hidden="true">🌐</span>
+      <span id="langToastMsg">Language updated: <strong>English</strong></span>
+    </div>
+    <footer class="footer"><div data-i18n-html="footer_copy">© 2026 <strong>Sumit G</strong></div><div data-i18n="footer_tagline">The Calm Engineer · Build. Learn. Ship again.</div></footer>
+    </div>
   <script>
     const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!reduce){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}
+    if(!reduce){const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.15});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));}
     else document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
 
-    // Top scroll progress bar
+    // Top scroll progress bar & hero scroll indicator
     const scrollBar = document.getElementById('scrollProgress');
-    if (scrollBar) {
+    const heroIndicator = document.getElementById('heroScrollIndicator');
+    if (scrollBar || heroIndicator) {
       let ticking = false;
-      const updateProgress = () => {
+      const updateScrollState = () => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
-        scrollBar.style.width = progress + '%';
+        if (scrollBar) {
+          const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = scrollHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / scrollHeight) * 100)) : 0;
+          scrollBar.style.width = progress + '%';
+        }
+        if (heroIndicator) {
+          // Smoothly fade out the indicator as user begins scrolling down (disappears by ~110px)
+          const opacity = Math.max(0, Math.min(1, 1 - (scrollTop / 110)));
+          heroIndicator.style.opacity = opacity;
+          heroIndicator.style.pointerEvents = opacity <= 0.05 ? 'none' : 'auto';
+        }
         ticking = false;
       };
       window.addEventListener('scroll', () => {
         if (!ticking) {
-          window.requestAnimationFrame(updateProgress);
+          window.requestAnimationFrame(updateScrollState);
           ticking = true;
         }
       }, { passive: true });
-      window.addEventListener('resize', updateProgress);
-      updateProgress();
+      window.addEventListener('resize', updateScrollState);
+      updateScrollState();
     }
 
     // Theme toggle switch logic
@@ -273,6 +596,20 @@
         themeToggleText.textContent = isLight ? 'Light' : 'Dark';
       }
 
+      const drawerThemeToggle = document.getElementById('drawerThemeToggle');
+      const drawerThemeText = document.getElementById('drawerThemeText');
+      const drawerThemeSub = document.getElementById('drawerThemeSub');
+      if (drawerThemeToggle) {
+        drawerThemeToggle.setAttribute('aria-checked', isLight ? 'true' : 'false');
+        drawerThemeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to high-contrast light theme');
+      }
+      if (drawerThemeText) {
+        drawerThemeText.textContent = isLight ? 'Light' : 'Dark';
+      }
+      if (drawerThemeSub) {
+        drawerThemeSub.textContent = isLight ? 'Light (High Contrast)' : 'Dark (Deep Slate)';
+      }
+
       if (persist) {
         try {
           localStorage.setItem('theme', theme);
@@ -291,6 +628,112 @@
       });
     }
 
+    const drawerThemeToggle = document.getElementById('drawerThemeToggle');
+    if (drawerThemeToggle) {
+      drawerThemeToggle.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        applyTheme(activeTheme === 'light' ? 'dark' : 'light', true);
+      });
+    }
+
+    // Copy Email to Clipboard Feature
+    const copyEmailRow = document.getElementById('copyEmailRow');
+    const copyEmailBtnAction = document.getElementById('copyEmailBtnAction');
+    const copyBadge = document.getElementById('copyBadge');
+    const copyBadgeText = document.getElementById('copyBadgeText');
+    const copyToast = document.getElementById('copyToast');
+
+    function copyEmail() {
+      const email = 'sumitg3767@gmail.com';
+      const onCopied = () => {
+        if (copyBadge) {
+          copyBadge.classList.add('copied');
+          const ic = copyBadge.querySelector('.icon-copy');
+          const ick = copyBadge.querySelector('.icon-check');
+          if (ic) ic.style.display = 'none';
+          if (ick) ick.style.display = 'inline-block';
+        }
+        if (copyBadgeText) copyBadgeText.textContent = 'Copied!';
+
+        if (copyEmailBtnAction) {
+          copyEmailBtnAction.classList.add('copied');
+          const ic = copyEmailBtnAction.querySelector('.icon-copy');
+          const ick = copyEmailBtnAction.querySelector('.icon-check');
+          if (ic) ic.style.display = 'none';
+          if (ick) ick.style.display = 'inline-block';
+          const lbl = copyEmailBtnAction.querySelector('.btn-copy-label');
+          if (lbl) lbl.textContent = 'Copied!';
+        }
+
+        if (copyToast) {
+          copyToast.classList.add('show');
+          clearTimeout(copyToast._timer);
+          copyToast._timer = setTimeout(() => {
+            copyToast.classList.remove('show');
+          }, 2400);
+        }
+
+        clearTimeout(window._emailResetTimer);
+        window._emailResetTimer = setTimeout(() => {
+          if (copyBadge) {
+            copyBadge.classList.remove('copied');
+            const ic = copyBadge.querySelector('.icon-copy');
+            const ick = copyBadge.querySelector('.icon-check');
+            if (ic) ic.style.display = 'inline-block';
+            if (ick) ick.style.display = 'none';
+          }
+          if (copyBadgeText) copyBadgeText.textContent = 'Copy email';
+
+          if (copyEmailBtnAction) {
+            copyEmailBtnAction.classList.remove('copied');
+            const ic = copyEmailBtnAction.querySelector('.icon-copy');
+            const ick = copyEmailBtnAction.querySelector('.icon-check');
+            if (ic) ic.style.display = 'inline-block';
+            if (ick) ick.style.display = 'none';
+            const lbl = copyEmailBtnAction.querySelector('.btn-copy-label');
+            if (lbl) lbl.textContent = 'Copy email';
+          }
+        }, 2500);
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(onCopied).catch(() => fallbackCopy(email, onCopied));
+      } else {
+        fallbackCopy(email, onCopied);
+      }
+    }
+
+    function fallbackCopy(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        if (cb) cb();
+      } catch (e) {
+        console.error('Copy failed', e);
+      }
+      document.body.removeChild(ta);
+    }
+
+    if (copyEmailRow) {
+      copyEmailRow.addEventListener('click', copyEmail);
+      copyEmailRow.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          copyEmail();
+        }
+      });
+    }
+    if (copyEmailBtnAction) {
+      copyEmailBtnAction.addEventListener('click', copyEmail);
+    }
+
     // Listen for system theme changes if user hasn't set an explicit preference
     try {
       window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
@@ -299,6 +742,589 @@
         }
       });
     } catch(e) {}
+
+    // Dynamic Language Switcher & Localization
+    const languages = {
+      en: { code: 'EN', name: 'English', flag: '🇺🇸', toast: 'Language updated: English' },
+      de: { code: 'DE', name: 'Deutsch', flag: '🇩🇪', toast: 'Sprache aktualisiert: Deutsch' },
+      ja: { code: 'JA', name: '日本語', flag: '🇯🇵', toast: '言語を変更しました: 日本語' },
+      fr: { code: 'FR', name: 'Français', flag: '🇫🇷', toast: 'Langue mise à jour : Français' },
+      es: { code: 'ES', name: 'Español', flag: '🇪🇸', toast: 'Idioma actualizado: Español' }
+    };
+
+    const translations = {
+      en: {
+        nav_work: 'Work',
+        nav_websites: 'Websites',
+        nav_philosophy: 'Philosophy',
+        nav_faq: 'FAQ',
+        hero_eyebrow: '<i class="dot"></i> Building in public · India',
+        hero_h1: 'The Calm Engineer.<br><span class="gradient">Shipping useful things.</span>',
+        hero_desc: 'Software architect and AI product builder — and the person behind a growing collection of real-world websites, AI-native products and digital experiences.',
+        hero_btn_work: 'Explore the work →',
+        hero_btn_websites: 'Websites ↗',
+        hero_btn_wa: 'Talk on WhatsApp ↗',
+        work_kicker: 'Selected work',
+        work_h2: 'Small experiments.<br>Big systems thinking.',
+        work_desc: "I like ideas that can be built quickly, put in someone's hands, and improved from reality rather than theory.",
+        card1_desc: 'An autonomous software-factory direction: workers, orchestration, memory, execution and the infrastructure around AI-native work.',
+        card2_desc: 'AI-powered frontend performance analysis with MCP, CLI and browser-performance tooling.',
+        card3_desc: 'Experiments in forward-deployed engineering workers exposed as deterministic tools.',
+        card4_desc: 'Turning engineering tickets into structured execution workflows so intent can move cleanly into action.',
+        websites_kicker: 'Client websites',
+        websites_h2: 'Real websites.<br>Built for real businesses.',
+        websites_desc: 'Not mockups. Not template screenshots. These are live hospitality and brand experiences designed to turn attention into enquiries, bookings and trust.',
+        client1_title: 'Luxury Hotel Websites',
+        client1_desc: 'A growing collection of hotel and villa websites across Goa, Santorini, Portugal and California — focused on brand, mobile UX, SEO and direct enquiry journeys.',
+        client1_link: 'Explore the hotel work →',
+        client2_title: 'Jenvin Luxury Homes Goa',
+        client2_desc: 'A hospitality experience combining property presentation, availability, reservations and owner-facing workflows.',
+        client2_link: 'View the project →',
+        philo_quote: '“Build the smallest thing that can <em>prove the idea.</em>”',
+        philo_p1: '<strong>Ship early.</strong><br>Reality is a better specification than a perfect plan.',
+        philo_p2: '<strong>Make it delightful.</strong><br>Good UX is not decoration. It is how software earns trust.',
+        philo_p3: '<strong>Let systems compound.</strong><br>Reusable workers, tools and infrastructure should make the next experiment cheaper.',
+        philo_p4: '<strong>Stay calm.</strong><br>Less noise. Better decisions. Keep shipping.',
+        faq_kicker: 'Common questions',
+        faq_h2: 'Clear answers.<br>Before we build.',
+        faq_desc: 'Practical answers to typical questions from hotel & villa operators, startup founders, and engineering teams.',
+        faq1_q: 'How does the hotel direct booking & WhatsApp flow work?',
+        faq1_a: "We build mobile-first hospitality websites with live room showcase, seasonal availability calendars, and direct WhatsApp reservation journeys. Guests select suites, confirm travel dates, and enquiry details route directly to your host's WhatsApp. You capture direct guest relationships, collect deposits upfront, and avoid 15%–25% OTA commissions without paying costly PMS monthly fees.",
+        faq2_q: 'What types of AI products and custom software do you build?',
+        faq2_a: 'Full-stack web applications, autonomous digital workers, Model Context Protocol (MCP) integrations, and LLM-powered interfaces. Everything is engineered with deterministic fallbacks, clean API boundaries, and responsive interfaces designed to compound in utility over time.',
+        faq3_q: 'Can you migrate an existing hotel or business website?',
+        faq3_a: 'Yes. We regularly modernize slow or outdated WordPress, Wix, Squarespace, and custom websites. We preserve your existing domain authority, upgrade page load speed to sub-second benchmarks, optimize local SEO, and configure custom domains and hosting cleanly.',
+        faq4_q: 'What are typical turnaround times and project milestones?',
+        faq4_a: 'We adhere strictly to our "ship early" ethos. Most hospitality websites and focused product MVPs launch within 1 to 3 weeks. You get hands-on staging reviews early in the process so reality shapes the build rather than lengthy theoretical planning.',
+        faq5_q: 'Are there recurring platform fees or code lock-in?',
+        faq5_a: 'No. You own 100% of your codebase, digital assets, and custom domain setup. For hotel builds, we prioritize lightweight architectures that run at near-zero maintenance overhead rather than locking you into expensive monthly SaaS subscriptions.',
+        faq6_q: 'How do we start a discussion about our project?',
+        faq6_a: "Drop a quick message on WhatsApp or email with your current website link, property details, or product concept. We'll review your scope, propose a sensible implementation plan, and answer any technical questions upfront.",
+        now_kicker: 'Now',
+        now_h2: 'AI-native software.<br>Automation. UX.',
+        now_desc: 'Currently exploring the intersection of AI agents, MCP, developer experience, autonomous digital workers and motion-rich interfaces.',
+        now_btn_github: 'See everything on GitHub →',
+        now_btn_hotels: 'Explore hotel work →',
+        contact_kicker: 'Have a project?',
+        contact_h3: "Let's build something useful.",
+        contact_p: 'If you need a hotel website, business website, AI product, automation or a digital experience that needs to feel considered rather than generic, start with a conversation.',
+        contact_btn_wa: 'Start on WhatsApp →',
+        contact_btn_copy: 'Copy email',
+        contact_btn_github: 'See GitHub →',
+        contact_kicker_elsewhere: 'Direct & Elsewhere',
+        contact_email_title: 'Email',
+        contact_link_hotels: 'Hotel work',
+        contact_sub_hotels: 'Hospitality portfolio ↗',
+        footer_copy: '© 2026 <strong>Sumit G</strong>',
+        footer_tagline: 'The Calm Engineer · Build. Learn. Ship again.',
+        wa_msg: 'Hi Sumit, I found your work online and would like to discuss a website or digital project.',
+        drawer_nav_label: 'Navigation',
+        drawer_preferences_label: 'Preferences & Controls',
+        drawer_theme_title: 'Appearance',
+        drawer_lang_title: 'Language',
+        drawer_hotels_link: 'Hotel Solutions & Direct Booking ↗',
+        drawer_cta_wa: 'Chat on WhatsApp ↗'
+      },
+      de: {
+        nav_work: 'Projekte',
+        nav_websites: 'Websites',
+        nav_philosophy: 'Philosophie',
+        nav_faq: 'FAQ',
+        hero_eyebrow: '<i class="dot"></i> In der Öffentlichkeit gebaut · Indien',
+        hero_h1: 'The Calm Engineer.<br><span class="gradient">Nützliche Dinge bauen & ausliefern.</span>',
+        hero_desc: 'Software-Architekt und AI-Produktentwickler — hinter einer wachsenden Sammlung realer Websites, nativer KI-Produkte und digitaler Erlebnisse.',
+        hero_btn_work: 'Projekte entdecken →',
+        hero_btn_websites: 'Websites ↗',
+        hero_btn_wa: 'Auf WhatsApp chatten ↗',
+        work_kicker: 'Ausgewählte Arbeiten',
+        work_h2: 'Kleine Experimente.<br>Großes Systemdenken.',
+        work_desc: 'Ich schätze Ideen, die schnell umgesetzt, in die Hände echter Nutzer gelegt und anhand der Realität weiterentwickelt werden.',
+        card1_desc: 'Autonome Software-Factory: AI-Worker, Orchestrierung, Memory, Execution und Infrastruktur für KI-native Wertschöpfung.',
+        card2_desc: 'KI-gestützte Frontend-Performance-Analyse mit MCP-, CLI- und Browser-Performance-Tools.',
+        card3_desc: 'Experimente mit Forward-Deployed Engineering Workern, bereitgestellt als deterministische Werkzeuge.',
+        card4_desc: 'Entwicklungs-Tickets in strukturierte Ausführungs-Workflows verwandeln, damit Intention direkt in Taten übergeht.',
+        websites_kicker: 'Kunden-Websites',
+        websites_h2: 'Echte Websites.<br>Für echte Unternehmen.',
+        websites_desc: 'Keine bloßen Entwürfe oder Templates. Dies sind produktive Hospitality- und Markenerlebnisse, die Aufmerksamkeit in Buchungen und Vertrauen wandeln.',
+        client1_title: 'Luxus-Hotel-Websites',
+        client1_desc: 'Eine wachsende Sammlung von Hotel- und Villen-Websites in Goa, Santorin, Portugal und Kalifornien — fokussiert auf Marke, mobile UX, SEO und Direktbuchungen.',
+        client1_link: 'Hotel-Arbeiten entdecken →',
+        client2_title: 'Jenvin Luxury Homes Goa',
+        client2_desc: 'Ein Hospitality-Erlebnis mit Immobilienpräsentation, Echtzeit-Verfügbarkeit, Reservierung und Eigentümer-Workflows.',
+        client2_link: 'Projekt ansehen →',
+        philo_quote: '“Baue das kleinste System, das die <em>Idee beweisen</em> kann.”',
+        philo_p1: '<strong>Früh ausliefern.</strong><br>Die Realität ist eine bessere Spezifikation als ein perfekter Plan.',
+        philo_p2: '<strong>Begeisterung schaffen.</strong><br>Gute UX ist keine Dekoration. Sie schafft Vertrauen in Software.',
+        philo_p3: '<strong>Systeme wachsen lassen.</strong><br>Wiederverwendbare Tools und Worker machen das nächste Experiment günstiger.',
+        philo_p4: '<strong>Ruhig bleiben.</strong><br>Weniger Lärm. Bessere Entscheidungen. Kontinuierlich ausliefern.',
+        faq_kicker: 'Häufige Fragen',
+        faq_h2: 'Klare Antworten.<br>Vor dem ersten Code.',
+        faq_desc: 'Praktische Antworten für Hotel- & Villenbetreiber, Gründer und Engineering-Teams.',
+        faq1_q: 'Wie funktioniert die Direktbuchung & der WhatsApp-Ablauf für Hotels?',
+        faq1_a: 'Wir erstellen mobile-first Websites mit Zimmerpräsentationen, Saison-Verfügbarkeitskalendern und direkten WhatsApp-Buchungsanfragen. Gäste wählen Suiten, bestätigen Reisedaten, und alle Details landen sofort beim Gastgeber auf WhatsApp. Sie sichern sich direkte Gästebeziehungen, Anzahlungen vorab und sparen 15%–25% OTA-Provisionen ohne teure PMS-Monatsgebühren.',
+        faq2_q: 'Welche KI-Produkte und Individualsoftware entwickeln Sie?',
+        faq2_a: 'Full-Stack-Webanwendungen, autonome digitale Worker, Model Context Protocol (MCP)-Integrationen und LLM-gestützte Interfaces. Alles mit deterministischen Fallbacks, klaren API-Grenzen und skalierbarer Architektur.',
+        faq3_q: 'Können Sie eine bestehende Hotel- oder Unternehmens-Website migrieren?',
+        faq3_a: 'Ja. Wir modernisieren regelmäßig langsame WordPress-, Wix- oder Squarespace-Websites. Wir sichern Ihre bestehende Domain-Autorität, beschleunigen Ladezeiten auf unter eine Sekunde, optimieren lokales SEO und richten Hosting sauber ein.',
+        faq4_q: 'Wie sehen typische Zeitpläne und Projekt-Meilensteine aus?',
+        faq4_a: 'Wir leben das Prinzip „Ship early“. Die meisten Websites und fokussierten MVPs gehen innerhalb von 1 bis 3 Wochen live. Sie erhalten frühzeitig Zugriff auf Staging-Umgebungen.',
+        faq5_q: 'Gibt es laufende Plattformgebühren oder Code-Lock-in?',
+        faq5_a: 'Nein. Sie besitzen 100% des Quellcodes, der digitalen Assets und der Domain. Wir setzen auf schlanke Architekturen ohne teure SaaS-Monatsabos.',
+        faq6_q: 'Wie starten wir die Zusammenarbeit an unserem Projekt?',
+        faq6_a: 'Senden Sie eine kurze Nachricht auf WhatsApp oder per E-Mail mit Ihrem aktuellen Link oder Ihrer Projektidee. Wir prüfen den Umfang und antworten innerhalb von 24 Stunden mit einem konkreten Fahrplan.',
+        now_kicker: 'Aktuell',
+        now_h2: 'KI-native Software.<br>Automation. UX.',
+        now_desc: 'Derzeitige Schwerpunkte: KI-Agenten, MCP, Developer Experience, autonome digitale Worker und reaktive Interfaces.',
+        now_btn_github: 'Alles auf GitHub ansehen →',
+        now_btn_hotels: 'Hotel-Arbeiten erkunden →',
+        contact_kicker: 'Projektidee?',
+        contact_h3: 'Lassen Sie uns etwas Nützliches bauen.',
+        contact_p: 'Wenn Sie eine Hotel-Website, Unternehmenspräsenz, ein KI-Produkt oder eine maßgeschneiderte Automatisierung suchen, starten wir mit einem Gespräch.',
+        contact_btn_wa: 'Auf WhatsApp starten →',
+        contact_btn_copy: 'E-Mail kopieren',
+        contact_btn_github: 'GitHub ansehen →',
+        contact_kicker_elsewhere: 'Direkt & Weiteres',
+        contact_email_title: 'E-Mail',
+        contact_link_hotels: 'Hotel-Arbeiten',
+        contact_sub_hotels: 'Hospitality-Portfolio ↗',
+        footer_copy: '© 2026 <strong>Sumit G</strong>',
+        footer_tagline: 'The Calm Engineer · Bauen. Lernen. Wieder ausliefern.',
+        wa_msg: 'Hallo Sumit, ich habe deine Arbeiten online gefunden und möchte über ein Website- oder Digitalprojekt sprechen.',
+        drawer_nav_label: 'Navigation',
+        drawer_preferences_label: 'Einstellungen & Steuerung',
+        drawer_theme_title: 'Erscheinungsbild',
+        drawer_lang_title: 'Sprache',
+        drawer_hotels_link: 'Hotel-Lösungen & Direktbuchung ↗',
+        drawer_cta_wa: 'Auf WhatsApp chatten ↗'
+      },
+      ja: {
+        nav_work: '実績・作品',
+        nav_websites: 'Webサイト',
+        nav_philosophy: '開発哲学',
+        nav_faq: 'FAQ',
+        hero_eyebrow: '<i class="dot"></i> パブリック開発 · インド',
+        hero_h1: 'The Calm Engineer.<br><span class="gradient">本質的で有用なプロダクトを届ける。</span>',
+        hero_desc: 'ソフトウェアアーキテクト兼AIプロダクト開発者。実稼働Webサイト、AIネイティブ製品、高品質なデジタル体験を設計・実装しています。',
+        hero_btn_work: '制作実績を見る →',
+        hero_btn_websites: 'Webサイト一覧 ↗',
+        hero_btn_wa: 'WhatsAppで相談 ↗',
+        work_kicker: '主要実績',
+        work_h2: '迅速な実験。<br>深遠なシステム思考。',
+        work_desc: '素早く構築し、実際のユーザーの手元に届け、机上の空論ではなく現実のフィードバックから改善する開発を大切にしています。',
+        card1_desc: '自律型ソフトウェアファクトリー：AIワーカー、オーケストレーション、メモリ、実行基盤からなるAIネイティブな開発環境。',
+        card2_desc: 'MCP、CLI、ブラウザ計測ツールを統合した、AI活用のフロントエンドパフォーマンス分析。',
+        card3_desc: '決定論的ツールとして動作する、最前線展開型AIエンジニアリングワーカーの実験。',
+        card4_desc: 'エンジニアリングチケットを構造化された実行ワークフローへと変換し、意図を迅速に成果へ繋げます。',
+        websites_kicker: '実稼働クライアントサイト',
+        websites_h2: '実ビジネスのための、<br>本物のWebサイト。',
+        websites_desc: 'モックアップや既製テンプレートではありません。訪問者の関心を直接の予約・問い合わせ・信頼へと変える高品質なデジタル体験です。',
+        client1_title: 'ラグジュアリーホテルWebサイト',
+        client1_desc: 'ゴア、サントリーニ、ポルトガル、カリフォルニア等のホテル・ヴィラ向けWebサイト。ブランド力、モバイルUX、SEO、直接予約導線を追求。',
+        client1_link: 'ホテル制作実績を見る →',
+        client2_title: 'Jenvin Luxury Homes Goa',
+        client2_desc: '物件紹介、空室状況、直接予約、オーナー向け管理機能を統合したハイエンド宿泊Webサイト。',
+        client2_link: 'プロジェクトを見る →',
+        philo_quote: '“アイデアを<em>証明できる最小限のもの</em>をまず作る。”',
+        philo_p1: '<strong>早期リリース。</strong><br>現実は、どんな完璧な計画書よりも正確な仕様書です。',
+        philo_p2: '<strong>心地よさを追求。</strong><br>優れたUXは装飾ではなく、ソフトウェアが信頼を獲得するための本質です。',
+        philo_p3: '<strong>システムの複利効果。</strong><br>再利用可能なワーカーやインフラが、次の実験コストを劇的に下げます。',
+        philo_p4: '<strong>静寂を保つ。</strong><br>ノイズを減らし、最良の決断を下し、着実に届ける。',
+        faq_kicker: 'よくあるご質問',
+        faq_h2: '明確な回答。<br>着工する前に。',
+        faq_desc: 'ホテル・ヴィラ運営者、スタートアップ創業者、開発チームからよくいただくご質問。',
+        faq1_q: 'ホテルの直接予約とWhatsApp導線はどのように機能しますか？',
+        faq1_a: '客室ショーケース、季節ごとの空室カレンダー、直接WhatsApp予約導線を備えたモバイルファーストなWebサイトを構築します。予約内容はホストのWhatsAppに即時届き、手数料なしで直接顧客を獲得できます。',
+        faq2_q: 'どのようなAIプロダクトやカスタムソフトウェアを構築できますか？',
+        faq2_a: 'フルスタックWebアプリ、自律型デジタルワーカー、Model Context Protocol（MCP）連携、LLMインターフェースなどを、強固なAPI境界と高い安定性で実装します。',
+        faq3_q: '既存のホテルやビジネスサイトの移行・刷新は可能ですか？',
+        faq3_a: 'はい。低速なWordPressやWixなどの既存サイトを1秒未満の高速読み込みへ刷新し、SEO評価を維持しながら最新のアーキテクチャへと移行します。',
+        faq4_q: '標準的な納期と開発スケジュールはどうなりますか？',
+        faq4_a: '迅速なリリースを重視しており、多くの宿泊サイトや特化型MVPは1〜3週間で本番公開可能です。',
+        faq5_q: '月額のプラットフォーム費用やコードの囲い込みはありますか？',
+        faq5_a: 'いいえ。コードベース、アセット、ドメイン設定の所有権は100%お客様に帰属します。高額な月額SaaSに依存しない軽量な構成を優先します。',
+        faq6_q: '相談やプロジェクトの開始手順を教えてください。',
+        faq6_a: '現在のサイトリンクや実現したい内容をWhatsAppまたはメールでお知らせください。24時間以内に要件を確認し、具体的な計画と費用感をご提案します。',
+        now_kicker: '現在地',
+        now_h2: 'AIネイティブソフトウェア。<br>自動化。UX。',
+        now_desc: 'AIエージェント、MCP、開発者体験、自律型デジタルワーカー、高品位なモーションUIの探求を進めています。',
+        now_btn_github: 'GitHubで全コードを見る →',
+        now_btn_hotels: 'ホテル実績を見る →',
+        contact_kicker: 'プロジェクトのご相談',
+        contact_h3: '価値あるプロダクトを共に創りましょう。',
+        contact_p: 'ホテルサイト、企業Webサイト、AIツール、自動化システムなど、洗練されたデジタル体験の構築をお考えの方はお気軽にご連絡ください。',
+        contact_btn_wa: 'WhatsAppで開始 →',
+        contact_btn_copy: 'メールをコピー',
+        contact_btn_github: 'GitHubを見る →',
+        contact_kicker_elsewhere: 'ダイレクト・リンク',
+        contact_email_title: 'メール',
+        contact_link_hotels: 'ホテル実績',
+        contact_sub_hotels: '宿泊ポートフォリオ ↗',
+        footer_copy: '© 2026 <strong>Sumit G</strong>',
+        footer_tagline: 'The Calm Engineer · 創り、学び、再び届ける。',
+        wa_msg: 'こんにちは、Sumit。Webサイトまたはデジタルプロジェクトについて相談させてください。',
+        drawer_nav_label: 'メニュー',
+        drawer_preferences_label: '設定・表示',
+        drawer_theme_title: '外観テーマ',
+        drawer_lang_title: '言語設定',
+        drawer_hotels_link: 'ホテル・ヴィラ向け直接予約 ↗',
+        drawer_cta_wa: 'WhatsAppで相談 ↗'
+      },
+      fr: {
+        nav_work: 'Projets',
+        nav_websites: 'Sites Web',
+        nav_philosophy: 'Philosophie',
+        nav_faq: 'FAQ',
+        hero_eyebrow: '<i class="dot"></i> Développement public · Inde',
+        hero_h1: 'The Calm Engineer.<br><span class="gradient">Concevoir et déployer l\'utile.</span>',
+        hero_desc: 'Architecte logiciel et créateur de produits IA — à l\'origine d\'une sélection de sites web réels, d\'outils IA natifs et d\'expériences numériques sur mesure.',
+        hero_btn_work: 'Explorer les projets →',
+        hero_btn_websites: 'Sites Web ↗',
+        hero_btn_wa: 'Échanger sur WhatsApp ↗',
+        work_kicker: 'Projets sélectionnés',
+        work_h2: 'Petites expériences.<br>Grande vision systémique.',
+        work_desc: 'Je privilégie les idées créées rapidement, confiées à de vrais utilisateurs et affinées par l\'expérience plutôt que la théorie.',
+        card1_desc: 'Direction usine logicielle autonome : agents IA, orchestration, mémoire, exécution et infrastructure pour le travail IA-natif.',
+        card2_desc: 'Analyse de performance frontend propulsée par l\'IA avec MCP, CLI et outils d\'optimisation navigateur.',
+        card3_desc: 'Expérimentations d\'agents d\'ingénierie déployés en première ligne comme outils déterministes.',
+        card4_desc: 'Transformer les tickets d\'ingénierie en flux d\'exécution structurés pour que l\'intention devienne action.',
+        websites_kicker: 'Sites clients',
+        websites_h2: 'Des sites réels.<br>Pour de vraies entreprises.',
+        websites_desc: 'Ni maquettes ni modèles préfabriqués. Des expériences d\'hôtellerie et de marque en production, conçues pour convertir l\'intérêt en réservations et confiance.',
+        client1_title: 'Sites d\'hôtels de luxe',
+        client1_desc: 'Une collection croissante de sites d\'hôtels et de villas à Goa, Santorin, au Portugal et en Californie — axés sur la marque, l\'UX mobile, le SEO et la réservation directe.',
+        client1_link: 'Explorer les sites hôteliers →',
+        client2_title: 'Jenvin Luxury Homes Goa',
+        client2_desc: 'Une expérience hôtelière combinant vitrine de propriété, calendrier de disponibilité, réservations et gestion propriétaire.',
+        client2_link: 'Voir le projet →',
+        philo_quote: '“Construisez la plus petite chose capable de <em>prouver l\'idée.</em>”',
+        philo_p1: '<strong>Déployer tôt.</strong><br>La réalité est une bien meilleure spécification qu\'un plan parfait.',
+        philo_p2: '<strong>Créer l\'élégance.</strong><br>Une excellente UX n\'est pas une décoration. C\'est ainsi que le logiciel gagne la confiance.',
+        philo_p3: '<strong>Faire fructifier les systèmes.</strong><br>Des outils et agents réutilisables rendent l\'expérimentation suivante plus accessible.',
+        philo_p4: '<strong>Garder son calme.</strong><br>Moins de bruit. De meilleures décisions. Déployer constamment.',
+        faq_kicker: 'Questions fréquentes',
+        faq_h2: 'Des réponses claires.<br>Avant de construire.',
+        faq_desc: 'Réponses concrètes pour propriétaires d\'hôtels et villas, fondateurs de startups et équipes techniques.',
+        faq1_q: 'Comment fonctionne le flux de réservation directe et WhatsApp pour les hôtels ?',
+        faq1_a: 'Nous concevons des sites pensés pour mobile avec vitrine des suites, calendriers de disponibilité et réservation directe par WhatsApp. Les voyageurs sélectionnent leurs dates et les demandes arrivent directement sur le WhatsApp de l\'hôte, sans commission intermédiaire de 15%–25%.',
+        faq2_q: 'Quels types de produits IA et logiciels sur mesure développez-vous ?',
+        faq2_a: 'Applications web full-stack, agents numériques autonomes, intégrations Model Context Protocol (MCP) et interfaces IA à haute réactivité.',
+        faq3_q: 'Pouvez-vous migrer un site d\'hôtel ou d\'entreprise existant ?',
+        faq3_a: 'Oui. Nous modernisons régulièrement des sites lents WordPress, Wix ou Squarespace vers des architectures ultra-rapides (<1s) tout en préservant votre référencement SEO.',
+        faq4_q: 'Quels sont les délais et étapes types d\'un projet ?',
+        faq4_a: 'Fidèles à notre philosophie, la plupart des sites hôteliers et MVPs sont livrés en 1 à 3 semaines avec accès rapide aux préversions.',
+        faq5_q: 'Y a-t-il des frais d\'abonnement récurrents ou un verrouillage propriétaire ?',
+        faq5_a: 'Non. Vous possédez 100% de votre code source, de vos médias et de vos domaines, sans abonnements SaaS contraignants.',
+        faq6_q: 'Comment démarrer une discussion sur notre projet ?',
+        faq6_a: 'Envoyez un message sur WhatsApp ou par e-mail avec le lien de votre site ou votre idée. Nous vous répondons sous 24 heures avec un plan concret.',
+        now_kicker: 'Actuellement',
+        now_h2: 'Logiciels IA-natifs.<br>Automatisation. UX.',
+        now_desc: 'Exploration continue à l\'intersection des agents IA, du protocole MCP, de l\'expérience développeur et des interfaces animées.',
+        now_btn_github: 'Tout voir sur GitHub →',
+        now_btn_hotels: 'Explorer le travail hôtelier →',
+        contact_kicker: 'Un projet en tête ?',
+        contact_h3: 'Construisons quelque chose d\'utile.',
+        contact_p: 'Pour un site d\'hôtel, un site d\'entreprise, un produit IA, une automatisation ou une expérience sur-mesure, démarrons par une conversation.',
+        contact_btn_wa: 'Démarrer sur WhatsApp →',
+        contact_btn_copy: 'Copier l\'e-mail',
+        contact_btn_github: 'Voir GitHub →',
+        contact_kicker_elsewhere: 'Direct & Réseaux',
+        contact_email_title: 'E-mail',
+        contact_link_hotels: 'Projets hôteliers',
+        contact_sub_hotels: 'Portfolio hôtelier ↗',
+        footer_copy: '© 2026 <strong>Sumit G</strong>',
+        footer_tagline: 'The Calm Engineer · Créer. Apprendre. Déployer à nouveau.',
+        wa_msg: 'Bonjour Sumit, j\'ai découvert vos projets en ligne et j\'aimerais discuter d\'un projet web ou digital.',
+        drawer_nav_label: 'Navigation',
+        drawer_preferences_label: 'Préférences & Contrôles',
+        drawer_theme_title: 'Apparence',
+        drawer_lang_title: 'Langue',
+        drawer_hotels_link: 'Solutions Hôtelières & Réservation directe ↗',
+        drawer_cta_wa: 'Échanger sur WhatsApp ↗'
+      },
+      es: {
+        nav_work: 'Proyectos',
+        nav_websites: 'Sitios Web',
+        nav_philosophy: 'Filosofía',
+        nav_faq: 'Preguntas',
+        hero_eyebrow: '<i class="dot"></i> Construyendo en público · India',
+        hero_h1: 'The Calm Engineer.<br><span class="gradient">Construyendo cosas útiles.</span>',
+        hero_desc: 'Arquitecto de software y creador de productos de IA — detrás de una colección de sitios web reales, herramientas nativas de IA y experiencias digitales.',
+        hero_btn_work: 'Explorar proyectos →',
+        hero_btn_websites: 'Sitios Web ↗',
+        hero_btn_wa: 'Hablar por WhatsApp ↗',
+        work_kicker: 'Proyectos seleccionados',
+        work_h2: 'Pequeños experimentos.<br>Pensamiento sistémico.',
+        work_desc: 'Apuesto por ideas que se construyen rápido, se entregan a usuarios reales y se perfeccionan a partir de la realidad.',
+        card1_desc: 'Factoría de software autónoma: agentes de IA, orquestación, memoria, ejecución e infraestructura de trabajo nativo en IA.',
+        card2_desc: 'Análisis de rendimiento frontend impulsado por IA con herramientas de MCP, CLI y optimización web.',
+        card3_desc: 'Experimentos en agentes de ingeniería desplegados en primera línea como herramientas deterministas.',
+        card4_desc: 'Conversión de tickets técnicos en flujos de ejecución estructurados para convertir la intención en acción directa.',
+        websites_kicker: 'Sitios web de clientes',
+        websites_h2: 'Sitios reales.<br>Para empresas reales.',
+        websites_desc: 'Nada de maquetas ni plantillas genéricas. Experiencias en vivo para hostelería y marcas diseñadas para convertir la atención en reservas y confianza.',
+        client1_title: 'Sitios web para hoteles de lujo',
+        client1_desc: 'Una colección creciente de sitios para hoteles y villas en Goa, Santorini, Portugal y California — enfocados en marca, UX móvil, SEO y reservas directas.',
+        client1_link: 'Explorar proyectos hoteleros →',
+        client2_title: 'Jenvin Luxury Homes Goa',
+        client2_desc: 'Una experiencia hotelera que combina presentación de villas, disponibilidad en tiempo real, reservas y flujos de gestión para propietarios.',
+        client2_link: 'Ver el proyecto →',
+        philo_quote: '“Construye lo más pequeño que pueda <em>demostrar la idea.</em>”',
+        philo_p1: '<strong>Lanza pronto.</strong><br>La realidad es una especificación mucho mejor que un plan perfecto.',
+        philo_p2: '<strong>Hazlo memorable.</strong><br>Una buena UX no es decoración. Es como el software gana la confianza del usuario.',
+        philo_p3: '<strong>Sistemas que multiplican.</strong><br>Herramientas y agentes reutilizables abaratan el siguiente experimento.',
+        philo_p4: '<strong>Mantén la calma.</strong><br>Menos ruido. Mejores decisiones. Sigue construyendo y lanzando.',
+        faq_kicker: 'Preguntas frecuentes',
+        faq_h2: 'Respuestas claras.<br>Antes de construir.',
+        faq_desc: 'Respuestas prácticas para propietarios de hoteles y villas, fundadores y equipos técnicos.',
+        faq1_q: '¿Cómo funciona el flujo de reservas directas y WhatsApp para hoteles?',
+        faq1_a: 'Diseñamos sitios móviles con catálogo de habitaciones, calendarios de disponibilidad y reserva directa por WhatsApp. Los huéspedes eligen fechas y los datos van directo al WhatsApp del anfitrión, ahorrando comisiones del 15%–25% sin cuotas mensuales de PMS.',
+        faq2_q: '¿Qué tipos de productos de IA y software a medida construyes?',
+        faq2_a: 'Aplicaciones web completas, agentes digitales autónomos, integraciones con Model Context Protocol (MCP) e interfaces de IA diseñadas para escalar con fiabilidad.',
+        faq3_q: '¿Puedes migrar un sitio web hotelero o corporativo existente?',
+        faq3_a: 'Sí. Modernizamos sitios lentos de WordPress, Wix o Squarespace a tiempos de carga inferiores a 1 segundo, preservando la autoridad del dominio y optimizando SEO local.',
+        faq4_q: '¿Cuáles son los plazos y fases de entrega típicos?',
+        faq4_a: 'La mayoría de sitios hoteleros y MVPs se lanzan en 1 a 3 semanas, con revisiones tempranas en entornos de prueba reales.',
+        faq5_q: '¿Existen costes recurrentes de plataforma o dependencia de código?',
+        faq5_a: 'No. Eres dueño del 100% del código, archivos y dominio. Priorizamos arquitecturas ligeras sin atarte a suscripciones mensuales caras.',
+        faq6_q: '¿Cómo comenzamos a hablar sobre nuestro proyecto?',
+        faq6_a: 'Envía un mensaje por WhatsApp o correo con el enlace actual de tu web o tu idea. Revisaré los requisitos y te enviaré un plan concreto en menos de 24 horas.',
+        now_kicker: 'Actualmente',
+        now_h2: 'Software nativo en IA.<br>Automatización. UX.',
+        now_desc: 'Explorando activamente agentes de IA, MCP, experiencia de desarrollo, agentes autónomos e interfaces con micro-interacciones fluidas.',
+        now_btn_github: 'Ver todo en GitHub →',
+        now_btn_hotels: 'Explorar trabajo hotelero →',
+        contact_kicker: '¿Tienes un proyecto?',
+        contact_h3: 'Construyamos algo útil.',
+        contact_p: 'Si necesitas un sitio web hotelero, web corporativa, producto de IA, automatización o una experiencia digital cuidada al detalle, conversemos.',
+        contact_btn_wa: 'Iniciar por WhatsApp →',
+        contact_btn_copy: 'Copiar correo',
+        contact_btn_github: 'Ver GitHub →',
+        contact_kicker_elsewhere: 'Contacto directo',
+        contact_email_title: 'Correo',
+        contact_link_hotels: 'Proyectos hoteleros',
+        contact_sub_hotels: 'Portafolio hotelero ↗',
+        footer_copy: '© 2026 <strong>Sumit G</strong>',
+        footer_tagline: 'The Calm Engineer · Construir. Aprender. Enviar de nuevo.',
+        wa_msg: 'Hola Sumit, encontré tu trabajo en línea y me gustaría hablar sobre un proyecto web o digital.',
+        drawer_nav_label: 'Navegación',
+        drawer_preferences_label: 'Preferencias y Ajustes',
+        drawer_theme_title: 'Apariencia',
+        drawer_lang_title: 'Idioma',
+        drawer_hotels_link: 'Soluciones Hoteleras y Reserva Directa ↗',
+        drawer_cta_wa: 'Hablar por WhatsApp ↗'
+      }
+    };
+
+    const langWrap = document.getElementById('langWrap');
+    const langToggleBtn = document.getElementById('langToggleBtn');
+    const langMenu = document.getElementById('langMenu');
+    const currentLangLabel = document.getElementById('currentLangLabel');
+    const langToast = document.getElementById('langToast');
+    const langToastFlag = document.getElementById('langToastFlag');
+    const langToastMsg = document.getElementById('langToastMsg');
+
+    let activeLang = 'en';
+
+    function showLangToast(flag, name) {
+      if (!langToast) return;
+      if (langToastFlag) langToastFlag.textContent = flag;
+      if (langToastMsg) langToastMsg.innerHTML = `Language set to <strong>${name}</strong>`;
+      langToast.classList.add('show');
+      clearTimeout(langToast._timer);
+      langToast._timer = setTimeout(() => {
+        langToast.classList.remove('show');
+      }, 2200);
+    }
+
+    function setLanguage(lang, persist = true, notify = false) {
+      if (!translations[lang]) lang = 'en';
+      activeLang = lang;
+      const meta = languages[lang] || languages.en;
+
+      if (persist) {
+        try {
+          localStorage.setItem('calm_lang', lang);
+        } catch(e) {}
+      }
+
+      document.documentElement.setAttribute('lang', lang);
+
+      if (currentLangLabel) {
+        currentLangLabel.textContent = meta.code;
+      }
+      if (langToggleBtn) {
+        langToggleBtn.setAttribute('aria-label', `Change language (current: ${meta.name})`);
+        langToggleBtn.setAttribute('title', `Language: ${meta.name}`);
+      }
+
+      // Update active option in menu
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        const isMatch = opt.getAttribute('data-lang') === lang;
+        opt.classList.toggle('active', isMatch);
+        opt.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+
+      // Update drawer language chips
+      document.querySelectorAll('.drawer-lang-chip').forEach(chip => {
+        const isMatch = chip.getAttribute('data-lang') === lang;
+        chip.classList.toggle('active', isMatch);
+        chip.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+
+      // Update text nodes
+      const dict = translations[lang] || translations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (dict[k] !== undefined) {
+          el.textContent = dict[k];
+        }
+      });
+
+      // Update HTML nodes
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const k = el.getAttribute('data-i18n-html');
+        if (dict[k] !== undefined) {
+          el.innerHTML = dict[k];
+        }
+      });
+
+      // Update WhatsApp links
+      if (dict.wa_msg) {
+        const encoded = encodeURIComponent(dict.wa_msg);
+        document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => {
+          a.href = `https://wa.me/918866768696?text=${encoded}`;
+        });
+      }
+
+      if (notify) {
+        showLangToast(meta.flag, meta.name);
+      }
+    }
+
+    // Toggle dropdown open/close
+    if (langToggleBtn && langWrap) {
+      langToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = langWrap.classList.toggle('open');
+        langToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!langWrap.contains(e.target)) {
+          langWrap.classList.remove('open');
+          langToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Keyboard accessibility
+      langWrap.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          langWrap.classList.remove('open');
+          langToggleBtn.setAttribute('aria-expanded', 'false');
+          langToggleBtn.focus();
+        }
+      });
+    }
+
+    // Option clicks
+    document.querySelectorAll('.lang-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang, true, true);
+        if (langWrap) {
+          langWrap.classList.remove('open');
+          if (langToggleBtn) langToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Drawer language chip clicks
+    document.querySelectorAll('.drawer-lang-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        setLanguage(lang, true, true);
+      });
+    });
+
+    // Mobile Drawer Controller
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+    const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+
+    function openMobileDrawer() {
+      if (!mobileDrawer) return;
+      mobileDrawer.classList.add('open');
+      if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add('open');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+      if (mobileNavToggle) mobileNavToggle.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('drawer-open');
+      if (mobileDrawerClose) mobileDrawerClose.focus();
+    }
+
+    function closeMobileDrawer() {
+      if (!mobileDrawer) return;
+      mobileDrawer.classList.remove('open');
+      if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      if (mobileNavToggle) {
+        mobileNavToggle.setAttribute('aria-expanded', 'false');
+        mobileNavToggle.focus();
+      }
+      document.body.classList.remove('drawer-open');
+    }
+
+    if (mobileNavToggle) {
+      mobileNavToggle.addEventListener('click', () => {
+        const isOpen = mobileDrawer && mobileDrawer.classList.contains('open');
+        if (isOpen) closeMobileDrawer();
+        else openMobileDrawer();
+      });
+    }
+
+    if (mobileDrawerClose) {
+      mobileDrawerClose.addEventListener('click', closeMobileDrawer);
+    }
+
+    if (mobileDrawerOverlay) {
+      mobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('open')) {
+        closeMobileDrawer();
+      }
+    });
+
+    document.querySelectorAll('.drawer-nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        closeMobileDrawer();
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 800 && mobileDrawer && mobileDrawer.classList.contains('open')) {
+        closeMobileDrawer();
+      }
+    });
+
+    // Detect initial language
+    let initialLang = 'en';
+    try {
+      const stored = localStorage.getItem('calm_lang');
+      if (stored && translations[stored]) {
+        initialLang = stored;
+      } else {
+        const userNavLang = (navigator.language || '').toLowerCase();
+        if (userNavLang.startsWith('de')) initialLang = 'de';
+        else if (userNavLang.startsWith('ja')) initialLang = 'ja';
+        else if (userNavLang.startsWith('fr')) initialLang = 'fr';
+        else if (userNavLang.startsWith('es')) initialLang = 'es';
+      }
+    } catch(e) {}
+
+    setLanguage(initialLang, false, false);
   </script>
 </body>
 </html>

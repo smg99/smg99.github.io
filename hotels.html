@@ -112,7 +112,20 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .navlinks { display: flex; gap: 20px; color: var(--m); font-size: 13px; align-items: center; }
+    @keyframes navSlideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .navlinks {
+      display: flex;
+      gap: 20px;
+      color: var(--m);
+      font-size: 13px;
+      align-items: center;
+      margin-left: auto;
+      margin-right: 20px;
+      animation: navSlideDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+    }
     .navlinks a {
       position: relative;
       display: inline-flex;
@@ -573,6 +586,97 @@
       transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .visible { opacity: 1; transform: none; }
+    .card.reveal:not(.visible):nth-child(odd), .plan.reveal:not(.visible):nth-child(odd), .fit-card.reveal:not(.visible):nth-child(odd), .workcard.reveal:not(.visible):nth-child(odd) {
+      transform: translate(-24px, 20px);
+    }
+    .card.reveal:not(.visible):nth-child(even), .plan.reveal:not(.visible):nth-child(even), .fit-card.reveal:not(.visible):nth-child(even), .workcard.reveal:not(.visible):nth-child(even) {
+      transform: translate(24px, 20px);
+    }
+
+    /* Copy Email feature */
+    .copy-email-btn {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .copy-email-btn.copied {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+    .copy-toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      background: #18181b;
+      color: #f4f4f5;
+      border: 1px solid #3f3f46;
+      padding: 11px 20px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.25s ease;
+      z-index: 10000;
+    }
+    .copy-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    [data-theme="light"] .copy-email-btn.copied {
+      background: #ecfdf5;
+      border-color: #6ee7b7;
+      color: #047857;
+    }
+    [data-theme="light"] .copy-toast {
+      background: #0f172a;
+      color: #f8fafc;
+      border-color: #334155;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Mobile Navigation Drawer & Hamburger Trigger */
+    .mobile-nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);cursor:pointer;transition:all .2s ease;outline:none;margin-left:auto;padding:0;-webkit-tap-highlight-color:transparent}
+    .mobile-nav-toggle:hover{background:rgba(255,255,255,.1);border-color:#334155}
+    .mobile-nav-toggle:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+    .mobile-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:9998;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1)}
+    .mobile-drawer-overlay.open{opacity:1;pointer-events:auto}
+    .mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--panel);border-left:1px solid var(--line);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.16,1,.3,1);box-shadow:-12px 0 38px rgba(0,0,0,.5);visibility:hidden;overflow:hidden}
+    .mobile-drawer.open{transform:translateX(0);visibility:visible}
+    body.drawer-open{overflow:hidden!important}
+    .drawer-header{height:78px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);flex-shrink:0}
+    .drawer-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.03em;color:var(--text);display:flex;align-items:center;gap:8px}
+    .drawer-brand-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:rgba(215,185,138,.12);border:1px solid rgba(215,185,138,.28);color:var(--g)}
+    .drawer-close-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .2s;outline:none}
+    .drawer-close-btn:hover{background:rgba(255,255,255,.09);color:var(--text);border-color:#334155}
+    .drawer-close-btn:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+    .drawer-body{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:24px}
+    .drawer-section-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--g);margin-bottom:10px}
+    .drawer-nav-list{display:flex;flex-direction:column;gap:7px}
+    .drawer-nav-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);color:var(--text);font-size:14.5px;font-weight:600;text-decoration:none;transition:all .2s;min-height:46px}
+    .drawer-nav-item:hover{background:rgba(255,255,255,.06);border-color:#334155;transform:translateX(3px)}
+    .drawer-nav-item:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+    .drawer-nav-item.highlight{background:rgba(215,185,138,.1);border-color:rgba(215,185,138,.3);color:#fde68a}
+    .drawer-nav-arrow{color:var(--muted);transition:transform .2s ease,color .2s ease;flex-shrink:0}
+    .drawer-nav-item:hover .drawer-nav-arrow{color:var(--g);transform:translateX(2px)}
+    .drawer-control-card{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);gap:12px}
+    .drawer-control-info{display:flex;flex-direction:column;gap:2px}
+    .drawer-control-title{font-size:13.5px;font-weight:600;color:var(--text)}
+    .drawer-control-sub{font-size:11.5px;color:var(--muted)}
+    .drawer-lang-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+    .drawer-lang-chip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text);font-size:11px;font-weight:600;cursor:pointer;transition:all .2s ease;outline:none;min-height:46px}
+    .drawer-lang-chip .chip-flag{font-size:16px;line-height:1}
+    .drawer-lang-chip:hover{background:rgba(255,255,255,.08);border-color:#334155}
+    .drawer-lang-chip.active{background:rgba(215,185,138,.18);border-color:var(--g);color:#ffffff;font-weight:700}
+    .drawer-lang-chip:focus-visible{outline:2px solid var(--g);outline-offset:2px}
+    .drawer-footer-actions{margin-top:auto;padding-top:10px}
 
     @media (max-width: 850px) {
       .problem, .showcase, .proof { grid-template-columns: 1fr; }
@@ -580,7 +684,10 @@
       .workgrid { grid-template-columns: 1fr; }
       .hero { padding-top: 70px; }
       .navlinks { gap: 11px; font-size: 12px; }
-      .navlinks a:nth-child(3), .navlinks a:nth-child(4) { display: none; }
+    }
+    @media (max-width: 800px) {
+      .navlinks, .nav-right { display: none !important; }
+      .mobile-nav-toggle { display: inline-flex; }
     }
     @media (max-width: 560px) {
       .wrap { width: calc(100% - 26px); }
@@ -610,7 +717,77 @@
     }
 
     /* Navigation & Theme Toggle */
-    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-right { display: flex; align-items: center; gap: 12px; animation: navSlideDown 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both; }
+    
+    /* Language Switcher */
+    .lang-wrap { position: relative; display: inline-block; }
+    .lang-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--l);
+      border-radius: 999px;
+      padding: 4px 11px 4px 9px;
+      color: var(--t);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      outline: none;
+      user-select: none;
+      min-height: 34px;
+    }
+    .lang-toggle:hover { background: rgba(255, 255, 255, 0.09); border-color: #52525b; }
+    .lang-toggle:focus-visible { outline: 2px solid var(--g); outline-offset: 2px; }
+    .lang-globe { color: var(--g); flex-shrink: 0; }
+    .lang-label { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; }
+    .lang-chevron { transition: transform 0.2s ease; color: var(--m); flex-shrink: 0; }
+    .lang-wrap.open .lang-chevron { transform: rotate(180deg); }
+    .lang-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      background: #141417;
+      border: 1px solid var(--l);
+      border-radius: 14px;
+      padding: 6px;
+      min-width: 215px;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+      display: none;
+      flex-direction: column;
+      gap: 3px;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+    }
+    .lang-wrap.open .lang-menu { display: flex; animation: navSlideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 9px;
+      border: none;
+      background: transparent;
+      color: var(--t);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: background 0.15s, color 0.15s;
+    }
+    .lang-option:hover { background: rgba(255, 255, 255, 0.08); }
+    .lang-option:focus-visible { outline: 2px solid var(--g); outline-offset: -2px; }
+    .lang-option.active { background: rgba(215, 185, 138, 0.16); color: #ffffff; font-weight: 600; }
+    .lang-flag { font-size: 15px; line-height: 1; }
+    .lang-meta { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+    .lang-name { font-size: 13px; font-weight: 600; color: inherit; }
+    .lang-meta-sub { font-size: 10.5px; color: var(--m); font-weight: 400; }
+    .lang-option.active .lang-meta-sub { color: var(--g2); }
+    .lang-check { color: var(--g); margin-left: auto; display: none; flex-shrink: 0; }
+    .lang-option.active .lang-check { display: inline-block; }
+
     .theme-toggle {
       display: inline-flex;
       align-items: center;
@@ -737,6 +914,27 @@
       background: #f1f5f9;
       border-color: #94a3b8;
     }
+    [data-theme="light"] .lang-toggle {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="light"] .lang-toggle:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+    [data-theme="light"] .lang-globe { color: #9a6b22; }
+    [data-theme="light"] .lang-menu {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    }
+    [data-theme="light"] .lang-option { color: #1e293b; }
+    [data-theme="light"] .lang-option:hover { background: #f1f5f9; }
+    [data-theme="light"] .lang-option.active { background: rgba(154, 107, 34, 0.12); color: #78350f; }
+    [data-theme="light"] .lang-option.active .lang-meta-sub { color: #9a6b22; }
+    [data-theme="light"] .lang-check { color: #9a6b22; }
     [data-theme="light"] .theme-switch-track {
       background: #9a6b22;
     }
@@ -750,11 +948,26 @@
     [data-theme="light"] .scroll-progress-track {
       background: rgba(0, 0, 0, 0.05);
     }
+    [data-theme="light"] .mobile-nav-toggle{background:#ffffff;border-color:#cbd5e1;color:#0f172a;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    [data-theme="light"] .mobile-nav-toggle:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .mobile-drawer{background:#ffffff;border-left-color:#cbd5e1;box-shadow:-12px 0 38px rgba(0,0,0,.15)}
+    [data-theme="light"] .drawer-header{border-bottom-color:#e2e8f0}
+    [data-theme="light"] .drawer-brand-badge{background:rgba(154,107,34,.1);border-color:rgba(154,107,34,.25);color:#78350f}
+    [data-theme="light"] .drawer-close-btn{background:#f8fafc;border-color:#cbd5e1;color:#475569}
+    [data-theme="light"] .drawer-close-btn:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+    [data-theme="light"] .drawer-nav-item{background:#f8fafc;border-color:#e2e8f0;color:#0f172a}
+    [data-theme="light"] .drawer-nav-item:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .drawer-nav-item.highlight{background:rgba(154,107,34,.08);border-color:rgba(154,107,34,.25);color:#78350f}
+    [data-theme="light"] .drawer-control-card{background:#f8fafc;border-color:#e2e8f0}
+    [data-theme="light"] .drawer-lang-chip{background:#f8fafc;border-color:#cbd5e1;color:#334155}
+    [data-theme="light"] .drawer-lang-chip:hover{background:#f1f5f9;border-color:#94a3b8}
+    [data-theme="light"] .drawer-lang-chip.active{background:rgba(154,107,34,.12);border-color:#9a6b22;color:#78350f}
 
     @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
+      .reveal, .card.reveal, .plan.reveal, .fit-card.reveal, .workcard.reveal { opacity: 1; transform: none !important; transition: none !important; }
       .scroll-progress-bar { transition: none; }
       .theme-switch-thumb { transition: none; }
+      .navlinks, .nav-right { animation: none !important; opacity: 1 !important; transform: none !important; }
       .navlinks a, .navlinks a::after { transition: none; transform: none; }
     }
   </style>
@@ -763,6 +976,103 @@
   <div class="scroll-progress-track" aria-hidden="true">
     <div class="scroll-progress-bar" id="scrollProgress"></div>
   </div>
+
+  <!-- Mobile Navigation Drawer Overlay & Container -->
+  <div id="mobileDrawerOverlay" class="mobile-drawer-overlay" aria-hidden="true"></div>
+  <aside id="mobileDrawer" class="mobile-drawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="drawer-header">
+      <div class="drawer-brand">SMG. <span class="drawer-brand-badge">Hospitality</span></div>
+      <button id="mobileDrawerClose" class="drawer-close-btn" type="button" aria-label="Close navigation menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Nav Links -->
+      <div class="drawer-section">
+        <span class="drawer-section-label" data-i18n="drawer_nav_label">Navigation</span>
+        <nav class="drawer-nav-list" aria-label="Mobile navigation links">
+          <a href="/" class="drawer-nav-item">
+            <span data-i18n="hotel_nav_portfolio">Portfolio</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#plans" class="drawer-nav-item">
+            <span data-i18n="hotel_nav_packages">Packages</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#showcase" class="drawer-nav-item">
+            <span data-i18n="hotel_nav_platform">Platform</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="#work" class="drawer-nav-item">
+            <span data-i18n="hotel_nav_live">Live Builds</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+          <a href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer" class="drawer-nav-item highlight">
+            <span data-i18n="hotel_nav_demo">Flagship Demo ↗</span>
+            <svg class="drawer-nav-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Controls & Preferences (Theme & Language) -->
+      <div class="drawer-section">
+        <span class="drawer-section-label" data-i18n="drawer_preferences_label">Preferences & Controls</span>
+
+        <!-- Theme Switcher -->
+        <div class="drawer-control-card">
+          <div class="drawer-control-info">
+            <div class="drawer-control-title" data-i18n="drawer_theme_title">Appearance</div>
+            <div class="drawer-control-sub" id="drawerThemeSub">Dark Mode</div>
+          </div>
+          <button id="drawerThemeToggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Toggle theme">
+            <span class="theme-switch-track" aria-hidden="true">
+              <span class="theme-switch-thumb">
+                <svg class="icon-dark" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg class="icon-light" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+              </span>
+            </span>
+            <span class="theme-toggle-label" id="drawerThemeText">Dark</span>
+          </button>
+        </div>
+
+        <!-- Language Switcher -->
+        <div style="margin-top: 14px;">
+          <div class="drawer-control-title" style="font-size:12.5px;font-weight:600;margin-bottom:8px;" data-i18n="drawer_lang_title">Language</div>
+          <div class="drawer-lang-grid" role="group" aria-label="Select language">
+            <button type="button" class="drawer-lang-chip active" data-lang="en">
+              <span class="chip-flag" aria-hidden="true">🇺🇸</span>
+              <span>EN</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="de">
+              <span class="chip-flag" aria-hidden="true">🇩🇪</span>
+              <span>DE</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="ja">
+              <span class="chip-flag" aria-hidden="true">🇯🇵</span>
+              <span>JA</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="fr">
+              <span class="chip-flag" aria-hidden="true">🇫🇷</span>
+              <span>FR</span>
+            </button>
+            <button type="button" class="drawer-lang-chip" data-lang="es">
+              <span class="chip-flag" aria-hidden="true">🇪🇸</span>
+              <span>ES</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action CTA -->
+      <div class="drawer-footer-actions">
+        <a class="btn primary" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20run%20a%20hotel%2Fvilla%20and%20would%20like%20to%20discuss%20a%20website%20and%20direct%20booking%20system." target="_blank" rel="noopener noreferrer" style="width:100%;justify-content:center;font-size:13px;padding:12px 18px;" data-i18n="drawer_cta_wa">Chat on WhatsApp ↗</a>
+      </div>
+    </div>
+  </aside>
   <div class="wrap">
     <!-- Navigation -->
     <nav class="nav">
@@ -770,14 +1080,65 @@
         <a class="brand" href="/">SMG.</a>
         <span class="brand-badge">Jenvin Hospitality</span>
       </div>
+      <div class="navlinks">
+        <a href="/" data-i18n="hotel_nav_portfolio">Portfolio</a>
+        <a href="#plans" data-i18n="hotel_nav_packages">Packages</a>
+        <a href="#showcase" data-i18n="hotel_nav_platform">Platform</a>
+        <a href="#work" data-i18n="hotel_nav_live">Live Builds</a>
+        <a class="highlight" href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer" data-i18n="hotel_nav_demo">Flagship Demo ↗</a>
+      </div>
       <div class="nav-right">
-        <div class="navlinks">
-          <a href="/">Portfolio</a>
-          <a href="#plans">Packages</a>
-          <a href="#showcase">Platform</a>
-          <a href="#work">Live Builds</a>
-          <a class="highlight" href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer">Flagship Demo ↗</a>
+        <!-- Language Switcher -->
+        <div class="lang-wrap" id="langWrap">
+          <button id="langToggle" class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select language" title="Select language">
+            <svg class="lang-globe" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span class="lang-label" id="currentLangLabel">EN</span>
+            <svg class="lang-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="lang-menu" id="langMenu" role="menu" aria-orientation="vertical">
+            <button class="lang-option active" role="menuitem" data-lang="en">
+              <span class="lang-flag" aria-hidden="true">🇺🇸</span>
+              <span class="lang-meta">
+                <span class="lang-name">English</span>
+                <span class="lang-meta-sub">US / Global</span>
+              </span>
+              <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button class="lang-option" role="menuitem" data-lang="de">
+              <span class="lang-flag" aria-hidden="true">🇩🇪</span>
+              <span class="lang-meta">
+                <span class="lang-name">Deutsch</span>
+                <span class="lang-meta-sub">Germany / DACH</span>
+              </span>
+              <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button class="lang-option" role="menuitem" data-lang="ja">
+              <span class="lang-flag" aria-hidden="true">🇯🇵</span>
+              <span class="lang-meta">
+                <span class="lang-name">日本語</span>
+                <span class="lang-meta-sub">Japan</span>
+              </span>
+              <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button class="lang-option" role="menuitem" data-lang="fr">
+              <span class="lang-flag" aria-hidden="true">🇫🇷</span>
+              <span class="lang-meta">
+                <span class="lang-name">Français</span>
+                <span class="lang-meta-sub">France / EU</span>
+              </span>
+              <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+            <button class="lang-option" role="menuitem" data-lang="es">
+              <span class="lang-flag" aria-hidden="true">🇪🇸</span>
+              <span class="lang-meta">
+                <span class="lang-name">Español</span>
+                <span class="lang-meta-sub">Spain / LatAm</span>
+              </span>
+              <svg class="lang-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </button>
+          </div>
         </div>
+
         <button id="themeToggle" class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Switch to high-contrast light theme" title="Toggle high-contrast light theme">
           <span class="theme-switch-track" aria-hidden="true">
             <span class="theme-switch-thumb">
@@ -788,6 +1149,15 @@
           <span class="theme-toggle-label" id="themeToggleText">Dark</span>
         </button>
       </div>
+
+      <!-- Mobile Navigation Hamburger Button (triggers below 800px) -->
+      <button id="mobileNavToggle" class="mobile-nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="18" x2="20" y2="18"></line>
+        </svg>
+      </button>
     </nav>
 
     <main>
@@ -795,25 +1165,25 @@
       <header class="hero reveal">
         <div class="ey" style="display:inline-flex;align-items:center;gap:8px;">
           <span style="width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);"></span>
-          For hotel & villa owners · Powered by Jenvin
+          <span data-i18n="hotel_hero_badge">For hotel & villa owners · Powered by Jenvin</span>
         </div>
-        <h1>Your hotel deserves a <span class="grad">better digital front door.</span></h1>
-        <p>We build high-converting hotel websites and practical booking workflows that turn guest discovery into direct revenue, real-time availability, and WhatsApp bookings — without forcing you into bloated, expensive hotel-tech stacks.</p>
+        <h1 data-i18n-html="hotel_hero_title">Your hotel deserves a <span class="grad">better digital front door.</span></h1>
+        <p data-i18n="hotel_hero_desc">We build high-converting hotel websites and practical booking workflows that turn guest discovery into direct revenue, real-time availability, and WhatsApp bookings — without forcing you into bloated, expensive hotel-tech stacks.</p>
         <div class="actions">
-          <a class="btn primary" href="#plans">See the 3 options ↓</a>
-          <a class="btn gold" href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer">Live Flagship Demo ↗</a>
-          <a class="btn" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20run%20a%20hotel%2Fvilla%20and%20would%20like%20to%20discuss%20a%20website%20and%20direct%20booking%20system." target="_blank" rel="noopener noreferrer">Discuss on WhatsApp ↗</a>
+          <a class="btn primary" href="#plans" data-i18n="hotel_hero_btn_options">See the 3 options ↓</a>
+          <a class="btn gold" href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer" data-i18n="hotel_hero_btn_demo">Live Flagship Demo ↗</a>
+          <a class="btn" id="hotelHeroWa" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20run%20a%20hotel%2Fvilla%20and%20would%20like%20to%20discuss%20a%20website%20and%20direct%20booking%20system." target="_blank" rel="noopener noreferrer" data-i18n="hotel_hero_btn_wa">Discuss on WhatsApp ↗</a>
         </div>
       </header>
 
       <!-- Problem & Opportunity -->
       <section class="problem reveal">
         <div>
-          <div class="ey">The opportunity</div>
-          <h2 class="title">A hotel website should do more than look good.</h2>
+          <div class="ey" data-i18n="hotel_opp_ey">The opportunity</div>
+          <h2 class="title" data-i18n="hotel_opp_title">A hotel website should do more than look good.</h2>
         </div>
         <div>
-          <p class="copy">Guests may find you on MakeMyTrip, Goibibo, Booking.com, Airbnb, Google or Instagram. Your own website should turn that attention into confidence, enquiries and direct bookings — while the hotel gets a clear, unified view of availability behind the scenes.</p>
+          <p class="copy" data-i18n="hotel_opp_copy">Guests may find you on MakeMyTrip, Goibibo, Booking.com, Airbnb, Google or Instagram. Your own website should turn that attention into confidence, enquiries and direct bookings — while the hotel gets a clear, unified view of availability behind the scenes.</p>
           <div class="pain">
             <article>
               <strong>OTA dependence</strong>
@@ -1185,26 +1555,41 @@
 
       <!-- Contact / Final CTA -->
       <section id="contact" class="final reveal">
-        <div class="ey">Hotel owners & operators</div>
-        <h2>Let's build your hotel's digital front door.</h2>
-        <p>Already have a website? We can migrate and modernise it. Starting from zero? We can build from scratch. Need availability or a booking workflow too? We'll scope it around how your property actually operates.</p>
+        <div class="ey" data-i18n="hotel_cta_ey">Hotel owners & operators</div>
+        <h2 data-i18n="hotel_cta_title">Let's build your hotel's digital front door.</h2>
+        <p data-i18n="hotel_cta_desc">Already have a website? We can migrate and modernise it. Starting from zero? We can build from scratch. Need availability or a booking workflow too? We'll scope it around how your property actually operates.</p>
         <div class="actions">
-          <a class="btn primary" href="#plans">Choose an option ↑</a>
-          <a class="btn gold" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20have%20a%20hotel%2Fvilla%20project%20and%20would%20like%20to%20review%20options%20for%20our%20website%20and%20direct%20booking." target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp →</a>
-          <a class="btn" href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer">Explore Flagship Build ↗</a>
+          <a class="btn primary" href="#plans" data-i18n="hotel_cta_btn_options">Choose an option ↑</a>
+          <a class="btn gold" id="hotelCtaWa" href="https://wa.me/918866768696?text=Hi%20Sumit%2C%20I%20have%20a%20hotel%2Fvilla%20project%20and%20would%20like%20to%20review%20options%20for%20our%20website%20and%20direct%20booking." target="_blank" rel="noopener noreferrer" data-i18n="hotel_cta_btn_wa">Chat with us on WhatsApp →</a>
+          <button type="button" class="btn copy-email-btn" id="hotelCopyEmailBtn" aria-label="Copy email sumitg3767@gmail.com to clipboard" title="Copy email to clipboard">
+            <svg class="icon-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <svg class="icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span id="hotelCopyEmailText" data-i18n="hotel_copy_email">Copy Email</span>
+          </button>
+          <a class="btn" href="https://qa.jenvin.co.in/" target="_blank" rel="noopener noreferrer" data-i18n="hotel_cta_btn_explore">Explore Flagship Build ↗</a>
         </div>
       </section>
     </main>
+
+    <div id="copyToastHotels" class="copy-toast" role="status" aria-live="polite">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span>Email copied: <strong>sumitg3767@gmail.com</strong></span>
+    </div>
+
+    <div id="langToast" class="copy-toast" role="status" aria-live="polite">
+      <span id="langToastFlag" style="font-size:16px;line-height:1" aria-hidden="true">🌐</span>
+      <span id="langToastMsg">Language updated: <strong>English</strong></span>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
       <div>
         <strong>The Calm Engineer · Jenvin Hospitality</strong><br>
-        <span style="color:#6d7077;">Crafting modern digital front doors for boutique hotels and luxury villas.</span>
+        <span style="color:#6d7077;" data-i18n="hotel_footer_tagline">Crafting modern digital front doors for boutique hotels and luxury villas.</span>
       </div>
       <div style="text-align:right;">
-        <a href="https://wa.me/918866768696" target="_blank" rel="noopener noreferrer" style="color:var(--g2);font-weight:700;">Direct WhatsApp ↗</a><br>
-        <span style="font-size:12px;color:#6d7077;">Migration · New builds · Availability · Operations</span>
+        <button type="button" id="hotelFooterEmailBtn" style="background:none;border:none;color:var(--g2);font-weight:700;cursor:pointer;font-family:inherit;font-size:13px;padding:0;display:inline-flex;align-items:center;gap:4px;"><span data-i18n-html="hotel_footer_email">sumitg3767@gmail.com (Copy) 📋</span></button><br>
+        <span style="font-size:12px;color:#6d7077;" data-i18n="hotel_footer_sub">Migration · New builds · Availability · Operations</span>
       </div>
     </footer>
   </div>
@@ -1222,7 +1607,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.08 });
+      }, { threshold: 0.15 });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
@@ -1313,6 +1698,20 @@
         themeToggleText.textContent = isLight ? 'Light' : 'Dark';
       }
 
+      const drawerThemeToggle = document.getElementById('drawerThemeToggle');
+      const drawerThemeText = document.getElementById('drawerThemeText');
+      const drawerThemeSub = document.getElementById('drawerThemeSub');
+      if (drawerThemeToggle) {
+        drawerThemeToggle.setAttribute('aria-checked', isLight ? 'true' : 'false');
+        drawerThemeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to high-contrast light theme');
+      }
+      if (drawerThemeText) {
+        drawerThemeText.textContent = isLight ? 'Light' : 'Dark';
+      }
+      if (drawerThemeSub) {
+        drawerThemeSub.textContent = isLight ? 'Light (High Contrast)' : 'Dark (Deep Slate)';
+      }
+
       if (persist) {
         try {
           localStorage.setItem('theme', theme);
@@ -1330,6 +1729,473 @@
         applyTheme(activeTheme === 'light' ? 'dark' : 'light', true);
       });
     }
+
+    const drawerThemeToggle = document.getElementById('drawerThemeToggle');
+    if (drawerThemeToggle) {
+      drawerThemeToggle.addEventListener('click', () => {
+        const activeTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        applyTheme(activeTheme === 'light' ? 'dark' : 'light', true);
+      });
+    }
+
+    // Copy Email to Clipboard Feature
+    const hotelCopyEmailBtn = document.getElementById('hotelCopyEmailBtn');
+    const hotelFooterEmailBtn = document.getElementById('hotelFooterEmailBtn');
+    const copyToastHotels = document.getElementById('copyToastHotels');
+    const hotelCopyEmailText = document.getElementById('hotelCopyEmailText');
+
+    function copyEmailHotels() {
+      const email = 'sumitg3767@gmail.com';
+      const onCopied = () => {
+        if (hotelCopyEmailBtn) {
+          hotelCopyEmailBtn.classList.add('copied');
+          const ic = hotelCopyEmailBtn.querySelector('.icon-copy');
+          const ick = hotelCopyEmailBtn.querySelector('.icon-check');
+          if (ic) ic.style.display = 'none';
+          if (ick) ick.style.display = 'inline-block';
+        }
+        if (hotelCopyEmailText) hotelCopyEmailText.textContent = 'Copied!';
+
+        if (copyToastHotels) {
+          copyToastHotels.classList.add('show');
+          clearTimeout(copyToastHotels._timer);
+          copyToastHotels._timer = setTimeout(() => {
+            copyToastHotels.classList.remove('show');
+          }, 2400);
+        }
+
+        clearTimeout(window._hotelEmailTimer);
+        window._hotelEmailTimer = setTimeout(() => {
+          if (hotelCopyEmailBtn) {
+            hotelCopyEmailBtn.classList.remove('copied');
+            const ic = hotelCopyEmailBtn.querySelector('.icon-copy');
+            const ick = hotelCopyEmailBtn.querySelector('.icon-check');
+            if (ic) ic.style.display = 'inline-block';
+            if (ick) ick.style.display = 'none';
+          }
+          if (hotelCopyEmailText) hotelCopyEmailText.textContent = 'Copy Email';
+        }, 2500);
+      };
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(onCopied).catch(() => fallbackCopyHotels(email, onCopied));
+      } else {
+        fallbackCopyHotels(email, onCopied);
+      }
+    }
+
+    function fallbackCopyHotels(text, cb) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        if (cb) cb();
+      } catch (e) {
+        console.error('Copy failed', e);
+      }
+      document.body.removeChild(ta);
+    }
+
+    if (hotelCopyEmailBtn) {
+      hotelCopyEmailBtn.addEventListener('click', copyEmailHotels);
+    }
+    if (hotelFooterEmailBtn) {
+      hotelFooterEmailBtn.addEventListener('click', copyEmailHotels);
+    }
+
+    // Multi-Language Localization Engine
+    const languages = {
+      en: { name: 'English', code: 'EN', flag: '🇺🇸' },
+      de: { name: 'Deutsch', code: 'DE', flag: '🇩🇪' },
+      ja: { name: '日本語', code: 'JA', flag: '🇯🇵' },
+      fr: { name: 'Français', code: 'FR', flag: '🇫🇷' },
+      es: { name: 'Español', code: 'ES', flag: '🇪🇸' }
+    };
+
+    const hotelTranslations = {
+      en: {
+        hotel_nav_portfolio: 'Portfolio',
+        hotel_nav_packages: 'Packages',
+        hotel_nav_platform: 'Platform',
+        hotel_nav_live: 'Live Builds',
+        hotel_nav_demo: 'Flagship Demo ↗',
+        hotel_hero_badge: 'For hotel & villa owners · Powered by Jenvin',
+        hotel_hero_title: 'Your hotel deserves a <span class="grad">better digital front door.</span>',
+        hotel_hero_desc: 'We build high-converting hotel websites and practical booking workflows that turn guest discovery into direct revenue, real-time availability, and WhatsApp bookings — without forcing you into bloated, expensive hotel-tech stacks.',
+        hotel_hero_btn_options: 'See the 3 options ↓',
+        hotel_hero_btn_demo: 'Live Flagship Demo ↗',
+        hotel_hero_btn_wa: 'Discuss on WhatsApp ↗',
+        hotel_opp_ey: 'The opportunity',
+        hotel_opp_title: 'A hotel website should do more than look good.',
+        hotel_opp_copy: 'Guests may find you on MakeMyTrip, Goibibo, Booking.com, Airbnb, Google or Instagram. Your own website should turn that attention into confidence, enquiries and direct bookings — while the hotel gets a clear, unified view of availability behind the scenes.',
+        hotel_cta_ey: 'Hotel owners & operators',
+        hotel_cta_title: "Let's build your hotel's digital front door.",
+        hotel_cta_desc: "Already have a website? We can migrate and modernise it. Starting from zero? We can build from scratch. Need availability or a booking workflow too? We'll scope it around how your property actually operates.",
+        hotel_cta_btn_options: 'Choose an option ↑',
+        hotel_cta_btn_wa: 'Chat with us on WhatsApp →',
+        hotel_copy_email: 'Copy Email',
+        hotel_cta_btn_explore: 'Explore Flagship Build ↗',
+        hotel_footer_tagline: 'Crafting modern digital front doors for boutique hotels and luxury villas.',
+        hotel_footer_email: 'sumitg3767@gmail.com (Copy) 📋',
+        hotel_footer_sub: 'Migration · New builds · Availability · Operations',
+        hotel_wa_msg_hero: 'Hi Sumit, I run a hotel/villa and would like to discuss a website and direct booking system.',
+        hotel_wa_msg_cta: 'Hi Sumit, I have a hotel/villa project and would like to review options for our website and direct booking.',
+        drawer_nav_label: 'Navigation',
+        drawer_preferences_label: 'Preferences & Controls',
+        drawer_theme_title: 'Appearance',
+        drawer_lang_title: 'Language',
+        drawer_cta_wa: 'Chat on WhatsApp ↗'
+      },
+      de: {
+        hotel_nav_portfolio: 'Portfolio',
+        hotel_nav_packages: 'Pakete',
+        hotel_nav_platform: 'Plattform',
+        hotel_nav_live: 'Live-Projekte',
+        hotel_nav_demo: 'Flaggschiff-Demo ↗',
+        hotel_hero_badge: 'Für Hotel- & Villenbesitzer · Powered by Jenvin',
+        hotel_hero_title: 'Ihr Hotel verdient einen <span class="grad">besseren digitalen Auftritt.</span>',
+        hotel_hero_desc: 'Wir erstellen hochkonvertierende Hotel-Websites und praxistaugliche Buchungsabläufe, die Gäste-Entdeckungen in Direktumsätze, Echtzeit-Verfügbarkeiten und WhatsApp-Buchungen verwandeln — ohne überladene, teure Hotel-Tech-Stacks.',
+        hotel_hero_btn_options: 'Die 3 Optionen ansehen ↓',
+        hotel_hero_btn_demo: 'Live-Flaggschiff-Demo ↗',
+        hotel_hero_btn_wa: 'Auf WhatsApp chatten ↗',
+        hotel_opp_ey: 'Die Gelegenheit',
+        hotel_opp_title: 'Eine Hotel-Website sollte mehr als nur gut aussehen.',
+        hotel_opp_copy: 'Gäste finden Sie über Google, Booking.com, Airbnb oder Instagram. Ihre eigene Website sollte diese Aufmerksamkeit in Vertrauen, Anfragen und Direktbuchungen wandeln — während das Hotel eine klare, zentrale Sicht auf alle Verfügbarkeiten behält.',
+        hotel_cta_ey: 'Hotel- & Villenbetreiber',
+        hotel_cta_title: 'Bauen wir den digitalen Auftritt Ihres Hotels.',
+        hotel_cta_desc: 'Sie haben bereits eine Website? Wir migrieren und modernisieren sie. Sie starten bei null? Wir bauen von Grund auf. Benötigen Sie auch Verfügbarkeiten oder ein Buchungssystem? Wir passen es genau an Ihre Abläufe an.',
+        hotel_cta_btn_options: 'Option wählen ↑',
+        hotel_cta_btn_wa: 'Auf WhatsApp chatten →',
+        hotel_copy_email: 'E-Mail kopieren',
+        hotel_cta_btn_explore: 'Flaggschiff-Projekt erkunden ↗',
+        hotel_footer_tagline: 'Moderne digitale Auftritte für Boutique-Hotels und Luxusvillen.',
+        hotel_footer_email: 'sumitg3767@gmail.com (Kopieren) 📋',
+        hotel_footer_sub: 'Migration · Neubau · Verfügbarkeit · Betrieb',
+        hotel_wa_msg_hero: 'Hallo Sumit, ich betreibe ein Hotel bzw. eine Villa und möchte über eine Website und ein Direktbuchungssystem sprechen.',
+        hotel_wa_msg_cta: 'Hallo Sumit, ich habe ein Hotel-/Villenprojekt und möchte Optionen für Website und Direktbuchung prüfen.',
+        drawer_nav_label: 'Navigation',
+        drawer_preferences_label: 'Einstellungen & Steuerung',
+        drawer_theme_title: 'Erscheinungsbild',
+        drawer_lang_title: 'Sprache',
+        drawer_cta_wa: 'Auf WhatsApp chatten ↗'
+      },
+      ja: {
+        hotel_nav_portfolio: 'ポートフォリオ',
+        hotel_nav_packages: 'パッケージ',
+        hotel_nav_platform: 'プラットフォーム',
+        hotel_nav_live: '実績サイト',
+        hotel_nav_demo: '旗艦デモ ↗',
+        hotel_hero_badge: 'ホテル・ヴィラオーナー向け · Powered by Jenvin',
+        hotel_hero_title: '宿泊施設のための、<span class="grad">真に選ばれるデジタル導線。</span>',
+        hotel_hero_desc: '旅行者の関心を直接の売上、リアルタイムの空室確認、WhatsApp予約へと繋げる高転換ホテルWebサイトと運用システムを構築します。高額で複雑なレガシーPMSは不要です。',
+        hotel_hero_btn_options: '3つのプランを見る ↓',
+        hotel_hero_btn_demo: '旗艦デモを体験 ↗',
+        hotel_hero_btn_wa: 'WhatsAppで相談 ↗',
+        hotel_opp_ey: '解決できる課題',
+        hotel_opp_title: 'ホテルWebサイトは、見た目以上の成果を生むべきです。',
+        hotel_opp_copy: 'OTAやSNSで見つけてくれたゲストを自社サイトへ誘導し、手数料ゼロの直接予約へ。裏側ではホストが一元化された空室管理をシンプルに行えます。',
+        hotel_cta_ey: 'ホテル・ヴィラ運営者様へ',
+        hotel_cta_title: '最高峰のデジタルエントランスを共に作りましょう。',
+        hotel_cta_desc: '既存サイトの刷新・高速化から新規立ち上げ、空室カレンダー連携まで、実際の宿泊運用に合わせた最適なアーキテクチャをご提案します。',
+        hotel_cta_btn_options: 'プランを選択 ↑',
+        hotel_cta_btn_wa: 'WhatsAppで相談する →',
+        hotel_copy_email: 'メールをコピー',
+        hotel_cta_btn_explore: '旗艦事例を見る ↗',
+        hotel_footer_tagline: 'ブティックホテルと高級ヴィラのための洗練されたデジタル体験を設計。',
+        hotel_footer_email: 'sumitg3767@gmail.com (コピー) 📋',
+        hotel_footer_sub: 'サイト移行 · 新規開発 · 空室管理 · 運用支援',
+        hotel_wa_msg_hero: 'こんにちは、Sumit。ホテル/ヴィラのWebサイトおよび直接予約システムについて相談したいです。',
+        drawer_nav_label: 'メニュー',
+        drawer_preferences_label: '設定・表示',
+        drawer_theme_title: '外観テーマ',
+        drawer_lang_title: '言語設定',
+        drawer_cta_wa: 'WhatsAppで相談 ↗'
+      },
+      fr: {
+        hotel_nav_portfolio: 'Portfolio',
+        hotel_nav_packages: 'Forfaits',
+        hotel_nav_platform: 'Plateforme',
+        hotel_nav_live: 'Réalisations',
+        hotel_nav_demo: 'Démo phare ↗',
+        hotel_hero_badge: 'Pour propriétaires d\'hôtels & villas · Powered by Jenvin',
+        hotel_hero_title: 'Votre hôtel mérite une <span class="grad">meilleure vitrine digitale.</span>',
+        hotel_hero_desc: 'Nous concevons des sites web hôteliers performants et des parcours de réservation pratiques qui transforment les visites en réservations directes, disponibilités en temps réel et échanges WhatsApp — sans systèmes hôteliers complexes et coûteux.',
+        hotel_hero_btn_options: 'Voir les 3 options ↓',
+        hotel_hero_btn_demo: 'Démo en direct ↗',
+        hotel_hero_btn_wa: 'Échanger sur WhatsApp ↗',
+        hotel_opp_ey: 'L\'opportunité',
+        hotel_opp_title: 'Un site d\'hôtel doit faire bien plus qu\'être élégant.',
+        hotel_opp_copy: 'Les voyageurs vous découvrent sur Booking, Airbnb, Google ou Instagram. Votre propre site doit transformer cette attention en confiance et réservations directes — avec une gestion de disponibilité claire et centralisée en coulisse.',
+        hotel_cta_ey: 'Propriétaires & exploitants hôteliers',
+        hotel_cta_title: 'Concevons la porte d\'entrée digitale de votre hôtel.',
+        hotel_cta_desc: 'Vous avez déjà un site ? Nous le migrons et le modernisons. Vous partez de zéro ? Nous créons sur mesure. Besoin de calendriers de disponibilité ? Nous adaptons tout à votre fonctionnement réel.',
+        hotel_cta_btn_options: 'Choisir une option ↑',
+        hotel_cta_btn_wa: 'Discuter sur WhatsApp →',
+        hotel_copy_email: 'Copier l\'e-mail',
+        hotel_cta_btn_explore: 'Explorer la réalisation phare ↗',
+        hotel_footer_tagline: 'Vitrines digitales modernes pour hôtels de charme et villas d\'exception.',
+        hotel_footer_email: 'sumitg3767@gmail.com (Copier) 📋',
+        hotel_footer_sub: 'Migration · Nouveaux sites · Disponibilités · Opérations',
+        hotel_wa_msg_hero: 'Bonjour Sumit, je gère un hôtel/une villa et j\'aimerais discuter d\'un site web et d\'un système de réservation directe.',
+        hotel_wa_msg_cta: 'Bonjour Sumit, j\'ai un projet d\'hôtel/villa et j\'aimerais examiner les options de site web et réservation directe.',
+        drawer_nav_label: 'Navigation',
+        drawer_preferences_label: 'Préférences & Contrôles',
+        drawer_theme_title: 'Apparence',
+        drawer_lang_title: 'Langue',
+        drawer_cta_wa: 'Échanger sur WhatsApp ↗'
+      },
+      es: {
+        hotel_nav_portfolio: 'Portafolio',
+        hotel_nav_packages: 'Paquetes',
+        hotel_nav_platform: 'Plataforma',
+        hotel_nav_live: 'Proyectos en vivo',
+        hotel_nav_demo: 'Demo insignia ↗',
+        hotel_hero_badge: 'Para propietarios de hoteles y villas · Powered by Jenvin',
+        hotel_hero_title: 'Tu hotel merece una <span class="grad">mejor entrada digital.</span>',
+        hotel_hero_desc: 'Creamos sitios web de alta conversión y flujos de reserva directos que convierten el interés de los huéspedes en ingresos directos, disponibilidad en tiempo real y reservas por WhatsApp — sin costes excesivos de software hotelero.',
+        hotel_hero_btn_options: 'Ver las 3 opciones ↓',
+        hotel_hero_btn_demo: 'Demo en vivo ↗',
+        hotel_hero_btn_wa: 'Hablar por WhatsApp ↗',
+        hotel_opp_ey: 'La oportunidad',
+        hotel_opp_title: 'La web de un hotel debe hacer mucho más que lucir bonita.',
+        hotel_opp_copy: 'Los huéspedes pueden encontrarte en Booking, Airbnb, Google o Instagram. Tu propia web debe convertir ese interés en reservas directas y confianza — mientras el hotel mantiene una visión unificada de la disponibilidad.',
+        hotel_cta_ey: 'Propietarios y gestores de hoteles',
+        hotel_cta_title: 'Construyamos la puerta de entrada digital de tu hotel.',
+        hotel_cta_desc: '¿Ya tienes un sitio web? Lo migramos y modernizamos. ¿Empiezas desde cero? Lo diseñamos a medida. ¿Necesitas disponibilidad o motor de reservas? Lo adaptamos a tus operaciones reales.',
+        hotel_cta_btn_options: 'Elegir una opción ↑',
+        hotel_cta_btn_wa: 'Hablar por WhatsApp →',
+        hotel_copy_email: 'Copiar correo',
+        hotel_cta_btn_explore: 'Explorar proyecto insignia ↗',
+        hotel_footer_tagline: 'Entradas digitales modernas para hoteles boutique y villas exclusivas.',
+        hotel_footer_email: 'sumitg3767@gmail.com (Copiar) 📋',
+        hotel_footer_sub: 'Migración · Nuevas webs · Disponibilidad · Operaciones',
+        hotel_wa_msg_hero: 'Hola Sumit, gestiono un hotel/villa y me gustaría hablar sobre un sitio web y sistema de reservas directas.',
+        hotel_wa_msg_cta: 'Hola Sumit, tengo un proyecto de hotel/villa y me gustaría revisar opciones para nuestro sitio web y reservas directas.',
+        drawer_nav_label: 'Navegación',
+        drawer_preferences_label: 'Preferencias y Ajustes',
+        drawer_theme_title: 'Apariencia',
+        drawer_lang_title: 'Idioma',
+        drawer_cta_wa: 'Hablar por WhatsApp ↗'
+      }
+    };
+
+    const langWrap = document.getElementById('langWrap');
+    const langToggleBtn = document.getElementById('langToggle');
+    const langMenu = document.getElementById('langMenu');
+    const currentLangLabel = document.getElementById('currentLangLabel');
+    const langToast = document.getElementById('langToast');
+    const langToastFlag = document.getElementById('langToastFlag');
+    const langToastMsg = document.getElementById('langToastMsg');
+
+    let activeLang = 'en';
+
+    function showLangToast(flag, name) {
+      if (!langToast) return;
+      if (langToastFlag) langToastFlag.textContent = flag;
+      if (langToastMsg) langToastMsg.innerHTML = `Language set to <strong>${name}</strong>`;
+      langToast.classList.add('show');
+      clearTimeout(langToast._timer);
+      langToast._timer = setTimeout(() => {
+        langToast.classList.remove('show');
+      }, 2200);
+    }
+
+    function setHotelLanguage(lang, persist = true, notify = false) {
+      if (!hotelTranslations[lang]) lang = 'en';
+      activeLang = lang;
+      const meta = languages[lang] || languages.en;
+
+      if (persist) {
+        try {
+          localStorage.setItem('calm_lang', lang);
+        } catch(e) {}
+      }
+
+      document.documentElement.setAttribute('lang', lang);
+
+      if (currentLangLabel) {
+        currentLangLabel.textContent = meta.code;
+      }
+      if (langToggleBtn) {
+        langToggleBtn.setAttribute('aria-label', `Change language (current: ${meta.name})`);
+        langToggleBtn.setAttribute('title', `Language: ${meta.name}`);
+      }
+
+      // Update active option in menu
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        const isMatch = opt.getAttribute('data-lang') === lang;
+        opt.classList.toggle('active', isMatch);
+        opt.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+
+      // Update drawer language chips
+      document.querySelectorAll('.drawer-lang-chip').forEach(chip => {
+        const isMatch = chip.getAttribute('data-lang') === lang;
+        chip.classList.toggle('active', isMatch);
+        chip.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+      });
+
+      // Update text nodes
+      const dict = hotelTranslations[lang] || hotelTranslations.en;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          el.textContent = dict[key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      // Update dynamic WhatsApp links if present
+      const heroWa = document.getElementById('hotelHeroWa');
+      if (heroWa && dict.hotel_wa_msg_hero) {
+        heroWa.href = `https://wa.me/918866768696?text=${encodeURIComponent(dict.hotel_wa_msg_hero)}`;
+      }
+      const ctaWa = document.getElementById('hotelCtaWa');
+      if (ctaWa && dict.hotel_wa_msg_cta) {
+        ctaWa.href = `https://wa.me/918866768696?text=${encodeURIComponent(dict.hotel_wa_msg_cta)}`;
+      }
+
+      if (notify) {
+        showLangToast(meta.flag, meta.name);
+      }
+    }
+
+    if (langToggleBtn && langWrap) {
+      langToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = langWrap.classList.toggle('open');
+        langToggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+
+      document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetLang = opt.getAttribute('data-lang');
+          if (targetLang && targetLang !== activeLang) {
+            setHotelLanguage(targetLang, true, true);
+          }
+          langWrap.classList.remove('open');
+          langToggleBtn.setAttribute('aria-expanded', 'false');
+          langToggleBtn.focus();
+        });
+      });
+
+      document.querySelectorAll('.drawer-lang-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            setHotelLanguage(lang, true, true);
+          }
+        });
+      });
+
+      // Mobile Drawer Controller
+      const mobileNavToggle = document.getElementById('mobileNavToggle');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+      const mobileDrawerClose = document.getElementById('mobileDrawerClose');
+
+      function openMobileDrawer() {
+        if (!mobileDrawer) return;
+        mobileDrawer.classList.add('open');
+        if (mobileDrawerOverlay) mobileDrawerOverlay.classList.add('open');
+        mobileDrawer.setAttribute('aria-hidden', 'false');
+        if (mobileNavToggle) mobileNavToggle.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('drawer-open');
+        if (mobileDrawerClose) mobileDrawerClose.focus();
+      }
+
+      function closeMobileDrawer() {
+        if (!mobileDrawer) return;
+        mobileDrawer.classList.remove('open');
+        if (mobileDrawerOverlay) mobileDrawerOverlay.classList.remove('open');
+        mobileDrawer.setAttribute('aria-hidden', 'true');
+        if (mobileNavToggle) {
+          mobileNavToggle.setAttribute('aria-expanded', 'false');
+          mobileNavToggle.focus();
+        }
+        document.body.classList.remove('drawer-open');
+      }
+
+      if (mobileNavToggle) {
+        mobileNavToggle.addEventListener('click', () => {
+          const isOpen = mobileDrawer && mobileDrawer.classList.contains('open');
+          if (isOpen) closeMobileDrawer();
+          else openMobileDrawer();
+        });
+      }
+
+      if (mobileDrawerClose) {
+        mobileDrawerClose.addEventListener('click', closeMobileDrawer);
+      }
+
+      if (mobileDrawerOverlay) {
+        mobileDrawerOverlay.addEventListener('click', closeMobileDrawer);
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('open')) {
+          closeMobileDrawer();
+        }
+      });
+
+      document.querySelectorAll('.drawer-nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+          closeMobileDrawer();
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 800 && mobileDrawer && mobileDrawer.classList.contains('open')) {
+          closeMobileDrawer();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!langWrap.contains(e.target)) {
+          langWrap.classList.remove('open');
+          langToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && langWrap.classList.contains('open')) {
+          langWrap.classList.remove('open');
+          langToggleBtn.setAttribute('aria-expanded', 'false');
+          langToggleBtn.focus();
+        }
+      });
+    }
+
+    // Initialize Language from localStorage or browser preferences
+    (function initHotelLang() {
+      try {
+        const savedLang = localStorage.getItem('calm_lang');
+        if (savedLang && hotelTranslations[savedLang]) {
+          setHotelLanguage(savedLang, false, false);
+          return;
+        }
+      } catch(e) {}
+
+      const userLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
+      if (hotelTranslations[userLang]) {
+        setHotelLanguage(userLang, false, false);
+      } else {
+        setHotelLanguage('en', false, false);
+      }
+    })();
 
     // Listen for system theme changes if user hasn't set an explicit preference
     try {
