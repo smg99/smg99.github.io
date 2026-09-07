@@ -113,8 +113,41 @@
       text-transform: uppercase;
     }
     .navlinks { display: flex; gap: 20px; color: var(--m); font-size: 13px; align-items: center; }
-    .navlinks a { transition: color 0.2s; }
-    .navlinks a:hover { color: var(--t); }
+    .navlinks a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 2px;
+      transition: color 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      outline: none;
+    }
+    .navlinks a:not(.highlight)::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--g);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border-radius: 999px;
+    }
+    .navlinks a:hover {
+      color: var(--t);
+      transform: translateY(-1px);
+    }
+    .navlinks a:not(.highlight):hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .navlinks a:focus-visible {
+      color: var(--t);
+      outline: 2px solid var(--g);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
     .navlinks a.highlight {
       color: var(--g2);
       font-weight: 700;
@@ -122,8 +155,13 @@
       border: 1px solid rgba(215, 185, 138, 0.3);
       border-radius: 999px;
       background: rgba(215, 185, 138, 0.06);
+      transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .navlinks a.highlight:hover { background: rgba(215, 185, 138, 0.15); border-color: var(--g); }
+    .navlinks a.highlight:hover {
+      background: rgba(215, 185, 138, 0.15);
+      border-color: var(--g);
+      transform: translateY(-1.5px);
+    }
 
     section { padding: 60px 0; }
     
@@ -717,6 +755,7 @@
       .reveal { opacity: 1; transform: none; transition: none; }
       .scroll-progress-bar { transition: none; }
       .theme-switch-thumb { transition: none; }
+      .navlinks a, .navlinks a::after { transition: none; transform: none; }
     }
   </style>
 </head>
