@@ -20,6 +20,10 @@ app.get('/hotels', (req, res) => {
   res.sendFile(path.join(__dirname, 'hotels.html'));
 });
 
+app.get('/ads.txt', (req, res) => {
+  res.type('text/plain').sendFile(path.join(__dirname, 'ads.txt'));
+});
+
 // Fallback for subpaths
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));

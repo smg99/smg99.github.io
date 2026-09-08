@@ -1,0 +1,3 @@
+# ads.txt for smg99.github.io
+# Google AdSense standard declaration
+google.com, pub-5122258320176382, DIRECT, f08c47fec0942fa0
