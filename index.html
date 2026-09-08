@@ -730,6 +730,7 @@
 
         if (copyEmailBtnAction) {
           copyEmailBtnAction.classList.add('copied');
+        gtag('event', 'copy_email', { 'event_category': 'engagement' });
           const ic = copyEmailBtnAction.querySelector('.icon-copy');
           const ick = copyEmailBtnAction.querySelector('.icon-check');
           if (ic) ic.style.display = 'none';
@@ -1213,6 +1214,7 @@
       if (!translations[lang]) lang = 'en';
       activeLang = lang;
       const meta = languages[lang] || languages.en;
+        gtag('event', 'language_change', { 'event_category': 'ui', 'event_label': lang });
 
       if (persist) {
         try {
@@ -1301,6 +1303,12 @@
         if (!langWrap.contains(e.target)) {
           langWrap.classList.remove('open');
           langToggleBtn.setAttribute('aria-expanded', 'false');
+        document.addEventListener('click', function(e) {
+          const waLink = e.target.closest('a.btn.wa');
+          if (waLink) {
+            gtag('event', 'whatsapp_cta', { 'event_category': 'cta' });
+          }
+        });
         }
       });
 
