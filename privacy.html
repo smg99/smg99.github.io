@@ -22,9 +22,25 @@
 </head>
 <body>
   <header class="nav">
-    <a class="brand" href="/"><span>Sumit</span> Gajjar</a>
-    <!-- navigation omitted for brevity, same as index.html -->
-  </header>
+  <a class="brand" href="/">SMG<span>.</span></a>
+  <div class="navlinks">
+    <a href="#work" data-i18n="nav_work">Work</a>
+    <a href="#websites" data-i18n="nav_websites">Websites</a>
+    <a href="#philosophy" data-i18n="nav_philosophy">Philosophy</a>
+    <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    <a href="https://github.com/smg99">GitHub</a>
+    <a href="https://x.com/thecalmengineer">X</a>
+  </div>
+  <div class="nav-right">
+    <div class="lang-wrap" id="langWrap">
+      <button id="langToggleBtn" class="lang-toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Change language (current: English)" title="Select language">
+        <svg class="lang-globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+        <span class="lang-label" id="currentLangLabel">EN</span>
+        <svg class="lang-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+    </div>
+  </div>
+</header>
   <main class="wrap">
     <h1>Privacy Policy</h1>
     <p>Last updated: September 8, 2026</p>
@@ -38,7 +54,7 @@
     </section>
     <section>
       <h2>Google Analytics</h2>
-      <p>Google Analytics tracks page views, user interactions, and other metrics. The data is aggregated and does not identify individual users.</p>
+      <p>Google Analytics tracks page views and user interactions. The data collected may include information about your device and browsing activity.</p>
     </section>
     <section>
       <h2>Google AdSense and advertising</h2>
