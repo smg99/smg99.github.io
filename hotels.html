@@ -646,18 +646,18 @@
     .mobile-nav-toggle{display:none;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);cursor:pointer;transition:all .2s ease;outline:none;margin-left:auto;padding:0;-webkit-tap-highlight-color:transparent}
     .mobile-nav-toggle:hover{background:rgba(255,255,255,.1);border-color:#334155}
     .mobile-nav-toggle:focus-visible{outline:2px solid var(--g);outline-offset:2px}
-    .mobile-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);z-index:9998;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.16,1,.3,1)}
-    .mobile-drawer-overlay.open{opacity:1;pointer-events:auto}
-    .mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--panel);border-left:1px solid var(--line);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.16,1,.3,1);box-shadow:-12px 0 38px rgba(0,0,0,.5);visibility:hidden;overflow:hidden}
+    .mobile-drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);z-index:9998;opacity:0;visibility:hidden;pointer-events:none;overscroll-behavior:none;touch-action:none;transition:opacity .38s cubic-bezier(.16,1,.3,1),background .38s cubic-bezier(.16,1,.3,1),backdrop-filter .38s cubic-bezier(.16,1,.3,1),-webkit-backdrop-filter .38s cubic-bezier(.16,1,.3,1),visibility .38s}
+    .mobile-drawer-overlay.open{opacity:1;visibility:visible;pointer-events:auto;background:rgba(0,0,0,.68);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+    .mobile-drawer{position:fixed;top:0;right:0;bottom:0;width:min(86vw,360px);max-width:100%;height:100%;height:100dvh;background:var(--panel);border-left:1px solid var(--line);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .34s cubic-bezier(.16,1,.3,1),visibility .34s;box-shadow:-12px 0 38px rgba(0,0,0,.5);visibility:hidden;overflow:hidden;overscroll-behavior:contain;touch-action:pan-y}
     .mobile-drawer.open{transform:translateX(0);visibility:visible}
-    body.drawer-open{overflow:hidden!important}
-    .drawer-header{height:78px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);flex-shrink:0}
+    html.drawer-open,body.drawer-open{overflow:hidden!important;overscroll-behavior:none!important}
+    .drawer-header{height:78px;padding:0 22px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);flex-shrink:0;touch-action:none}
     .drawer-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;letter-spacing:-.03em;color:var(--text);display:flex;align-items:center;gap:8px}
     .drawer-brand-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:rgba(215,185,138,.12);border:1px solid rgba(215,185,138,.28);color:var(--g)}
     .drawer-close-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--muted);cursor:pointer;transition:all .2s;outline:none}
     .drawer-close-btn:hover{background:rgba(255,255,255,.09);color:var(--text);border-color:#334155}
     .drawer-close-btn:focus-visible{outline:2px solid var(--g);outline-offset:2px}
-    .drawer-body{flex:1;overflow-y:auto;padding:22px;display:flex;flex-direction:column;gap:24px}
+    .drawer-body{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;overscroll-behavior-y:contain;padding:22px;display:flex;flex-direction:column;gap:24px;touch-action:pan-y}
     .drawer-section-label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--g);margin-bottom:10px}
     .drawer-nav-list{display:flex;flex-direction:column;gap:7px}
     .drawer-nav-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.025);border:1px solid var(--line);color:var(--text);font-size:14.5px;font-weight:600;text-decoration:none;transition:all .2s;min-height:46px}
