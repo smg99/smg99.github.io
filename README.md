@@ -1,6 +1,6 @@
 # SMG99 Portfolio
 
-Personal portfolio for **Sumit Gajjar**, focused on real client websites, digital products, AI-native projects, and selected engineering work.
+Personal portfolio for **Sumit G**, focused on real client websites, digital products, AI-native projects, and selected engineering work.
 
 ## What you'll find
 
