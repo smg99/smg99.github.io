@@ -1448,10 +1448,11 @@
           <h2 class="title">Managed or One-Time. You choose.</h2>
           <p><b>Managed</b> keeps hosting, backups, maintenance, support and applicable Jenvin Core improvements looked after for you. <b>One-Time</b> lets you buy the agreed version once with no recurring Jenvin subscription.</p>
         </div>
+        <div class="reveal" style="text-align:center;margin-bottom:18px"><label class="fine" for="hotel-region">Regional pricing: </label><select id="hotel-region" style="background:var(--p2);color:var(--t);border:1px solid var(--l);border-radius:999px;padding:9px 14px"><option value="IN">India · INR</option><option value="SEA">Southeast Asia · USD</option><option value="AE">UAE · AED</option><option value="EU">Europe · EUR</option><option value="GB">UK · GBP</option><option value="NA">US / Canada · USD</option><option value="AU">Australia · AUD</option></select></div>
         <div class="tablewrap reveal">
           <table>
             <thead><tr><th>How you pay</th><th>Essential</th><th>Smart Availability ⭐</th><th>Direct Booking Pro</th></tr></thead>
-            <tbody>
+            <tbody id="hotel-pricing-body">
               <tr><td><b>MANAGED · Monthly</b><br><span class="fine">Lower commitment</span></td><td><b>₹9,999 today</b><br>then ₹499/mo<br><span class="fine">Year 1: ₹15,987</span></td><td><b>₹19,999 today</b><br>then ₹1,499/mo<br><span class="fine">Year 1: ₹37,987</span></td><td><b>From ₹29,999 today</b><br>then ₹2,999/mo<br><span class="fine">Year 1: from ₹65,987</span></td></tr>
               <tr><td><b>MANAGED · Annual ⭐</b><br><span class="fine">Best value</span></td><td><b>₹14,998 today</b><br><span class="fine">₹9,999 setup + first year ₹4,999</span><br>then ₹4,999/yr</td><td><b>₹34,998 today</b><br><span class="fine">₹19,999 setup + first year ₹14,999</span><br>then ₹14,999/yr</td><td><b>From ₹59,998 today</b><br><span class="fine">₹29,999 setup + first year ₹29,999</span><br>then from ₹29,999/yr</td></tr>
               <tr><td><b>Annual saving</b><br><span class="fine">vs paying monthly</span></td><td>₹989/year</td><td><b>₹2,989/year</b></td><td>₹5,989+/year</td></tr>
@@ -1469,7 +1470,7 @@
           <div class="fit reveal" style="border-color:rgba(211,178,106,.45)">
             <div class="num">Annual Managed ⭐</div>
             <h3>Our recommended option.</h3>
-            <p>Pay setup plus the first year together, then only the annual plan from year two. For Smart, that means <b>₹34,998 to get started</b>, then <b>₹14,999/year</b>.</p>
+            <p>Pay setup plus the first year together, then only the annual plan from year two. Your regional price is shown above automatically, and you can change the region at any time.</p>
           </div>
           <div class="fit reveal">
             <div class="num">One-Time</div>
@@ -2423,5 +2424,6 @@
     } catch(e) {}
   </script>
 <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-5122258320176382" data-ad-slot="6274153864" data-auto-format="rspv" data-full-width=""><div overflow=""></div></amp-ad>
+  <script src="/hotels-pricing.js"></script>
 </body>
 </html>
