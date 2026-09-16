@@ -1,4 +1,11 @@
+# Search and AI discovery crawlers are welcome to index public pages.
 User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://smg99.github.io/sitemap.xml
